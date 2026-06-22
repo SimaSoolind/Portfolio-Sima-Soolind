@@ -1,7 +1,5 @@
 export default function Footer() {
   return (
-    <footer>
-      <p>© 2026 Sima Soolind</p>
-    </footer>
+    <footer>© 2026 Sima Soolind</footer>
   )
 }
