@@ -2,7 +2,7 @@ const projects = [
   {
     id: "card1",
     icon: "📖",
-    title: "Bibel-appen",
+    title: "Trons-källa",
     desc: "Interaktiv webbapplikation för Svenska Koptisk-Ortodoxa Kyrkan. Digitaliserar Bibeln (73 böcker), bönboken Agbeya, liturgier och den liturgiska kalendern.",
     bullets: [
       { label: "Offline-first arkitektur", text: "Hämtar från externt API med lokal bible.json som fallback via try/catch — appen kraschar aldrig." },
@@ -41,7 +41,8 @@ const projects = [
     ],
     pills: ["HTML", "CSS", "JavaScript"],
     links: [
-      { text: "GitHub", href: "#", private: false },
+      { text: "GitHub", href: "https://github.com/SimaSoolind/SM-Bygg", private: false },
+      { text: "Se live →", href: "https://sm-bygg.netlify.app", private: false },
     ]
   },
 ]
