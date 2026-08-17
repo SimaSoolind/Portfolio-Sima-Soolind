@@ -12,7 +12,7 @@ const projects = [
     ],
     pills: ["React 18", "React Router v6", "Context API", "OpenAI API", "GSAP", "Vite"],
     links: [
-      { text: "Privat repo – visas vid förfrågan", href: "#", private: true },
+      { text: "Privat repo – visas vid förfrågan", private: true },
     ]
   },
   {
@@ -27,7 +27,7 @@ const projects = [
     ],
     pills: ["TypeScript", "Node.js", "Express", "MongoDB", "JWT", "React Native"],
     links: [
-      { text: "Privat repo – visas vid förfrågan", href: "#", private: true },
+      { text: "Privat repo – visas vid förfrågan", private: true },
     ]
   },
   {
@@ -76,15 +76,21 @@ export default function Projects() {
 
               <div className="project-links">
                 {p.links.map((link) => (
-                  <a
-                    key={link.text}
-                    href={link.href}
-                    className={`project-link${link.private ? ' project-link--private' : ''}`}
-                    target={link.href !== "#" ? "_blank" : undefined}
-                    rel="noreferrer"
-                  >
-                    {link.text}
-                  </a>
+                  link.private ? (
+                    <span key={link.text} className="project-link project-link--private">
+                      {link.text}
+                    </span>
+                  ) : (
+                    <a
+                      key={link.text}
+                      href={link.href}
+                      className="project-link"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      {link.text}
+                    </a>
+                  )
                 ))}
               </div>
             </div>

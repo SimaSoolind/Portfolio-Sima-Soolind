@@ -5,7 +5,7 @@ export default function About() {
         <div className="section-label">Om mig</div>
         <h2 className="section-title">Fullstackutvecklare med inriktning på IT-säkerhet och AI</h2>
 
-        <p style={{ fontSize: '15px', color: '#C8D0DC', lineHeight: '1.8', marginBottom: '36px' }}>
+        <p className="about-intro">
           Jag är en systemutvecklare som brinner för att bygga moderna, säkra och användarvänliga
           webbapplikationer. Min bakgrund har gett mig en djup förståelse för projektledning, tydlig
           kommunikation och vikten av att alltid ha slutanvändaren i fokus. Jag skapar inte bara kod

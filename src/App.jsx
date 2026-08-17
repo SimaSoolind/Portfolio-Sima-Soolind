@@ -37,9 +37,9 @@ export default function App() {
         opacity: 0, y: 28, duration: 0.5, stagger: 0.1
       })
 
-      gsap.to('.project-card', {
+      gsap.from('.project-card', {
         scrollTrigger: { trigger: '.projects-grid', start: 'top 82%' },
-        opacity: 1, y: 0, duration: 0.6, stagger: 0.18, ease: 'power2.out'
+        opacity: 0, y: 28, duration: 0.6, stagger: 0.18, ease: 'power2.out'
       })
 
       gsap.from('.lia-box', {

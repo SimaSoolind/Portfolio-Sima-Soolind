@@ -114,8 +114,8 @@ nav {
 }
 
 .photo-ring {
-  width: 140px;
-  height: 140px;
+  width: 260px;
+  height: 260px;
   border-radius: 50%;
   border: 2px solid rgba(201,168,76,0.3);
   padding: 6px;
@@ -189,14 +189,10 @@ nav {
   text-decoration: none;
 }
 
-/* ── ABOUT GRID ── */
-.about-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 14px;
-}
-
-.about-card {
+/* ── KORT (delas av About, Skills och Projects) ── */
+.about-card,
+.skill-group,
+.project-card {
   background-color: #1A1F2C;
   border: 1px solid rgba(255,255,255,0.08);
   border-radius: 14px;
@@ -204,10 +200,26 @@ nav {
   transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
-.about-card:hover {
+.about-card:hover,
+.skill-group:hover,
+.project-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 8px 24px rgba(0,0,0,0.3), 0 0 0 1px rgba(201,168,76,0.3);
   border-color: rgba(201,168,76,0.3);
+}
+
+/* ── ABOUT ── */
+.about-intro {
+  font-size: 15px;
+  color: #C8D0DC;
+  line-height: 1.8;
+  margin-bottom: 36px;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
 }
 
 .about-card h3 { font-size: 13px; font-weight: 600; color: #C9A84C; margin-bottom: 8px; }
@@ -219,20 +231,6 @@ nav {
   display: grid;
   grid-template-columns: 1fr;
   gap: 14px;
-}
-
-.skill-group {
-  background-color: #1A1F2C;
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 14px;
-  padding: 28px;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-}
-
-.skill-group:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.3), 0 0 0 1px rgba(201,168,76,0.3);
-  border-color: rgba(201,168,76,0.3);
 }
 
 .skill-group h3 {
@@ -254,12 +252,6 @@ nav {
   border-radius: 6px;
   font-size: 12px;
   font-weight: 500;
-}
-
-.tag.gold {
-  background-color: rgba(201,168,76,0.12);
-  border-color: rgba(201,168,76,0.3);
-  color: #C9A84C;
 }
 
 .tag-future {
@@ -298,19 +290,7 @@ nav {
   gap: 16px;
 }
 
-.project-card {
-  background-color: #1A1F2C;
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 14px;
-  padding: 32px;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-}
-
-.project-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.3), 0 0 0 1px rgba(201,168,76,0.3);
-  border-color: rgba(201,168,76,0.3);
-}
+.project-card { padding: 32px; }
 
 .project-icon  { font-size: 26px; margin-bottom: 12px; }
 .project-title { font-size: 16px; font-weight: 600; color: #F5F5F5; margin-bottom: 8px; }
@@ -442,7 +422,6 @@ footer {
 
 /* ── TABLET & DESKTOP (600px+) ── */
 @media (min-width: 600px) {
-  nav { padding: 0; }
   .nav-top { padding: 18px 40px; }
   .hamburger { display: none; }
   .nav-links {
@@ -463,10 +442,10 @@ footer {
     border-bottom: none;
   }
   .hero { padding: 90px 40px 72px; }
-  .hero-inner { flex-direction: row; align-items: center; gap: 52px; }
-  .hero-text { order: 1; }
+  .hero-inner { flex-direction: row; align-items: center; justify-content: space-between; gap: 40px; max-width: 1100px; }
+  .hero-text { order: 1; flex: 0 1 520px; }
   .photo-wrap { order: 2; flex-shrink: 0; justify-content: flex-end; }
-  .photo-ring { width: 180px; height: 180px; overflow: hidden; }
+  .photo-ring { width: 380px; height: 380px; }
   .hero-name  { font-size: 58px; }
   .section { padding: 90px 40px; }
   .about-grid    { grid-template-columns: 1fr 1fr; }
