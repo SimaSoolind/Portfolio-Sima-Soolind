@@ -2,7 +2,7 @@ const projects = [
   {
     id: "card1",
     icon: "📖",
-    title: "Trons-källa",
+    title: "Guds ord",
     desc: "Interaktiv webbapplikation för Svenska Koptisk-Ortodoxa Kyrkan. Digitaliserar Bibeln (73 böcker), bönboken Agbeya, liturgier och den liturgiska kalendern.",
     bullets: [
       { label: "Offline-first arkitektur", text: "Hämtar från externt API med lokal bible.json som fallback via try/catch — appen kraschar aldrig." },
@@ -18,7 +18,7 @@ const projects = [
   {
     id: "card2",
     icon: "✝️",
-    title: "Kyrko-appen",
+    title: "ParishHub",
     desc: "Fullstack SaaS-system för församlingsadministration. Designad för att hantera känslig data säkert och effektivisera prästens dagliga arbete.",
     bullets: [
       { label: "Säkerhet & GDPR", text: "Tvåfaktorsautentisering (2FA), rollbaserad åtkomst (JWT) och krypterade databasfält för privata själavårdsanteckningar." },

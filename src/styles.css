@@ -16,10 +16,10 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 16px 20px;
+  padding: 44px 20px;
 }
 
-.nav-logo { font-family: 'IBM Plex Mono', monospace; font-size: 15px; font-weight: 700; color: #1F5C56; letter-spacing: 0.06em; }
+.nav-logo { font-family: 'Fira Code', monospace; font-size: 15px; font-weight: 700; color: #1F5C56; letter-spacing: 0.06em; }
 
 .hamburger {
   display: flex;
@@ -52,14 +52,20 @@ nav {
 .nav-links li a {
   display: block;
   padding: 13px 0;
-  font-size: 15px;
-  color: #5B6058;
+  font-size: 19px;
+  color: #1E2420;
   text-decoration: none;
   font-weight: 500;
   border-bottom: 1px solid #E2DCCC;
+  transition: color .2s ease;
 }
 
 .nav-links li:last-child a { border-bottom: none; }
+
+.nav-links li a:hover,
+.nav-links li a.active {
+  color: #B9832E;
+}
 
 /* ── PAGE WRAP ── */
 .page {
@@ -69,12 +75,19 @@ nav {
 
 /* ── SECTION ── */
 .section {
-  padding: 64px 20px;
+  padding: 80px 20px;
   background-color: #EFEAE0;
+  /* Grundgradienten som används på alla sektioner: Papper högst upp,
+     Sand i mitten, Petrol som tonar in i de nedersta 30–40% för djup.
+     Två lager staplas så att lite Sand finns kvar längst ner också —
+     det är det som ger den andra, gröna tonen tillsammans med Petrol. */
+  background-image:
+    linear-gradient(to bottom, rgba(201, 191, 169, 0) 0%, rgba(201, 191, 169, 0.13) 50%, rgba(201, 191, 169, 0.08) 100%),
+    linear-gradient(to bottom, rgba(31, 92, 86, 0) 60%, rgba(31, 92, 86, 0.23) 100%);
 }
 
 .section.alt {
-  background-color: #F6F2E9;
+  background-color: #EFEAE0;
 }
 
 .section-inner {
@@ -82,8 +95,31 @@ nav {
   margin: 0 auto;
 }
 
+/* Maxbredd per sektion, enligt layouttabellen */
+#skills .section-inner,
+#projects .section-inner {
+  max-width: 1200px;
+}
+
+#about .section-inner,
+#lia .section-inner {
+  max-width: 1000px;
+}
+
+#contact .section-inner {
+  max-width: 800px;
+}
+
+/* Padding per sektion, enligt layouttabellen (Kompetens/Projekt behåller 80px) */
+#about,
+#lia,
+#contact {
+  padding-top: 60px;
+  padding-bottom: 60px;
+}
+
 .section-label {
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: 'Fira Code', monospace;
   font-size: 11px;
   font-weight: 500;
   letter-spacing: 0.14em;
@@ -93,23 +129,42 @@ nav {
 }
 
 .section-title {
-  font-size: 26px;
+  position: relative;
+  font-size: 36px;
   font-weight: 600;
   color: #1E2420;
   margin-bottom: 32px;
+  padding-bottom: 14px;
   line-height: 1.25;
 }
 
-/* ── HERO ── */
+.section-title::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 40px;
+  height: 3px;
+  background-color: #B9832E;
+}
+
+/* ── HERO ──
+   Starkaste gradienten på sidan (20%). Sand tonar in bakom bilden som en mjuk
+   inramning, Papper i toppen, en pytteliten Petrol-ton längst ner för djup. */
 .hero {
-  padding: 72px 20px 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 85vh;
+  padding: 120px 20px 60px;
   background:
-    radial-gradient(circle at 25% 30%, rgba(31,92,86,0.28) 0%, rgba(31,92,86,0.08) 32%, transparent 50%),
+    radial-gradient(circle at 75% 45%, rgba(201,191,169,0.40) 0%, rgba(201,191,169,0.15) 45%, transparent 70%),
+    linear-gradient(to bottom, rgba(239,234,224,0) 0%, rgba(239,234,224,0) 80%, rgba(31,92,86,0.18) 100%),
     #EFEAE0;
 }
 
 .hero-inner {
-  max-width: 860px;
+  max-width: 1200px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -122,18 +177,21 @@ nav {
 }
 
 .photo-ring {
-  width: 260px;
-  height: 260px;
-  border: 1px solid #C9BFA9;
+  width: 280px;
+  height: 350px;
+  border: 3px solid #C9BFA9;
+  border-radius: 14px;
   padding: 6px;
   overflow: hidden;
   flex-shrink: 0;
+  box-shadow: 0 2px 14px rgba(31,92,86,0.25);
 }
 
 .photo-circle {
   width: 100%;
   height: 100%;
   overflow: hidden;
+  border-radius: 14px;
   position: relative;
 }
 
@@ -146,10 +204,10 @@ nav {
 
 .hero-badge {
   display: inline-block;
-  font-family: 'IBM Plex Mono', monospace;
-  background-color: rgba(31,92,86,0.10);
-  border: 1px solid rgba(31,92,86,0.35);
-  color: #1F5C56;
+  font-family: 'Fira Code', monospace;
+  background-color: rgba(185,131,46,0.10);
+  border: 1px solid rgba(185,131,46,0.35);
+  color: #B9832E;
   padding: 5px 14px;
   font-size: 11px;
   font-weight: 500;
@@ -169,60 +227,82 @@ nav {
 .hero-name span { color: #1F5C56; }
 
 .hero-subtitle {
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: 'Fira Code', monospace;
   font-size: 13px;
-  color: #5B6058;
+  color: #1F5C56;
   letter-spacing: 0.05em;
   margin-bottom: 16px;
 }
 
 .hero-desc {
-  font-size: 15px;
-  color: #5B6058;
+  font-size: 18px;
+  color: #1E2420;
   line-height: 1.75;
   margin-bottom: 32px;
-  max-width: 480px;
+  max-width: 580px;
 }
 
 .btn-gold {
   display: inline-block;
-  font-family: 'IBM Plex Mono', monospace;
-  background-color: #1F5C56;
-  color: #F3EFE4;
+  font-family: 'Fira Code', monospace;
+  background-color: #B9832E;
+  color: #1E2420;
   padding: 13px 28px;
   font-size: 13px;
   font-weight: 500;
   letter-spacing: 0.06em;
   text-decoration: none;
+  border-radius: 14px;
   transition: background-color .2s ease;
 }
 
-.btn-gold:hover { background-color: #164742; }
+.btn-gold:hover { background-color: #8a6a30; }
 
 /* ── KORT (delas av About, Skills och Projects) ── */
 .about-card,
 .skill-group,
 .project-card {
-  background-color: #F6F2E9;
-  border: 1px solid #C9BFA9;
   padding: 28px;
   transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.skill-group,
+.project-card {
+  border: 2px solid #1E2420;
+  background-color: #C9BFA9;
+  border-radius: 14px;
+}
+
+.about-card {
+  border: 2px solid #1E2420;
+  border-radius: 14px;
+  background-color: #C9BFA9;
 }
 
 .about-card:hover,
 .skill-group:hover,
 .project-card:hover {
   transform: translateY(-4px);
-  border-color: #1F5C56;
+  border-color: #B9832E;
+  box-shadow: 0 8px 22px rgba(185,131,46,0.18);
 }
 
 /* ── ABOUT ── */
+#about .section-title {
+  text-align: center;
+}
+
+#about .section-title::after {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
 .about-intro {
-  font-size: 16px;
+  font-size: 19px;
   color: #1E2420;
   line-height: 1.85;
-  margin-bottom: 36px;
-  max-width: 62ch;
+  margin-bottom: 40px;
+  max-width: 580px;
 }
 
 .about-intro strong { color: #164742; }
@@ -230,11 +310,20 @@ nav {
 .about-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 14px;
+  gap: 40px;
 }
 
-.about-card h3 { font-size: 15px; font-weight: 600; color: #1E2420; margin-bottom: 8px; }
-.about-card p  { font-size: 14px; color: #5B6058; line-height: 1.7; }
+.about-icon {
+  width: 40px;
+  height: 40px;
+  color: #B9832E;
+  stroke-width: 2;
+  margin-bottom: 14px;
+  display: block;
+}
+
+.about-card h3 { font-size: 24px; font-weight: 600; color: #1E2420; margin-bottom: 14px; }
+.about-card p  { font-size: 18px; color: #1F5C56; line-height: 1.5; }
 .about-card em { color: #1E2420; font-style: normal; font-weight: 600; }
 
 /* ── SKILLS ── */
@@ -245,11 +334,11 @@ nav {
 }
 
 .skill-group h3 {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 11px;
+  font-family: 'Fira Code', monospace;
+  font-size: 22px;
   font-weight: 500;
-  color: #1F5C56;
-  letter-spacing: 0.12em;
+  color: #1E2420;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   margin-bottom: 12px;
 }
@@ -257,13 +346,23 @@ nav {
 .tags { display: flex; flex-wrap: wrap; gap: 8px; }
 
 .tag {
-  font-family: 'IBM Plex Mono', monospace;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: 'Fira Code', monospace;
   background-color: #EFEAE0;
-  border: 1px solid #C9BFA9;
-  color: #1E2420;
-  padding: 5px 12px;
+  border: 1px solid #1F5C56;
+  border-radius: 8px;
+  color: #1F5C56;
+  padding: 6px 12px;
   font-size: 12px;
   font-weight: 500;
+}
+
+.tag-icon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
 }
 
 .tag-future {
@@ -274,9 +373,9 @@ nav {
 
 .skills-legend {
   margin-top: 24px;
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: 'Fira Code', monospace;
   font-size: 11px;
-  color: #5B6058;
+  color: #1E2420;
   display: flex;
   align-items: center;
   gap: 6px;
@@ -304,8 +403,8 @@ nav {
 .project-card { padding: 32px; }
 
 .project-icon  { font-size: 26px; margin-bottom: 12px; }
-.project-title { font-family: 'Bitter', Georgia, serif; font-size: 18px; font-weight: 600; color: #1E2420; margin-bottom: 8px; }
-.project-desc  { font-size: 14px; color: #5B6058; line-height: 1.7; margin-bottom: 16px; }
+.project-title { font-family: 'Inter', system-ui, sans-serif; font-size: 23px; font-weight: 600; color: #1E2420; margin-bottom: 8px; }
+.project-desc  { font-size: 18px; color: #1E2420; line-height: 1.7; margin-bottom: 16px; }
 
 .project-bullets {
   list-style: none;
@@ -317,14 +416,14 @@ nav {
 
 .project-bullets li {
   font-size: 13px;
-  color: #5B6058;
+  color: #1E2420;
   line-height: 1.6;
   padding-left: 12px;
   border-left: 2px solid #1F5C56;
 }
 
 .bullet-label {
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: 'Fira Code', monospace;
   color: #1F5C56;
   font-weight: 500;
 }
@@ -337,18 +436,18 @@ nav {
 }
 
 .project-link {
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: 'Fira Code', monospace;
   font-size: 12px;
   font-weight: 500;
   padding: 6px 14px;
   text-decoration: none;
-  border: 1px solid #1F5C56;
-  color: #1F5C56;
+  border: 1px solid #B9832E;
+  color: #B9832E;
   letter-spacing: 0.03em;
   transition: background-color .2s ease, color .2s ease;
 }
 
-.project-link:hover { background-color: #1F5C56; color: #F3EFE4; }
+.project-link:hover { background-color: #B9832E; color: #F3EFE4; }
 
 .project-link--private {
   border-color: #C9BFA9;
@@ -359,11 +458,11 @@ nav {
 
 .pills { display: flex; flex-wrap: wrap; gap: 6px; }
 .pill {
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: 'Fira Code', monospace;
   font-size: 11px;
   background-color: #EFEAE0;
-  border: 1px solid #C9BFA9;
-  color: #1E2420;
+  border: 1px solid #1F5C56;
+  color: #1F5C56;
   padding: 3px 10px;
   font-weight: 500;
 }
@@ -379,12 +478,12 @@ nav {
 }
 
 .lia-col h3 {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 11px; font-weight: 500; color: #1F5C56;
-  letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 14px;
+  font-family: 'Fira Code', monospace;
+  font-size: 22px; font-weight: 500; color: #1F5C56;
+  letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 14px;
 }
 
-.lia-col ul { list-style: none; font-size: 14px; color: #5B6058; line-height: 2.1; }
+.lia-col ul { list-style: none; font-size: 18px; color: #1E2420; line-height: 2.1; }
 .lia-col ul li::before { content: "→ "; color: #1F5C56; }
 
 /* ── CONTACT ── */
@@ -395,14 +494,14 @@ nav {
   text-align: center;
 }
 
-.contact-box p { font-size: 15px; color: #5B6058; margin-bottom: 24px; line-height: 1.75; max-width: 56ch; margin-left: auto; margin-right: auto; }
+.contact-box p { font-size: 18px; color: #1E2420; margin-bottom: 24px; line-height: 1.75; max-width: 580px; margin-left: auto; margin-right: auto; }
 
 .social-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; }
 .social-btn {
   display: inline-block;
-  font-family: 'IBM Plex Mono', monospace;
-  border: 1px solid #1E2420;
-  color: #1E2420;
+  font-family: 'Fira Code', monospace;
+  border: 1px solid #B9832E;
+  color: #B9832E;
   padding: 10px 22px;
   font-size: 13px;
   font-weight: 500;
@@ -411,20 +510,26 @@ nav {
   transition: background-color .2s ease, color .2s ease, border-color .2s ease;
 }
 .social-btn:hover, .social-btn:focus-visible {
-  background-color: #1F5C56;
-  border-color: #1F5C56;
+  background-color: #B9832E;
+  border-color: #B9832E;
   color: #F3EFE4;
 }
 
 /* ── FOOTER ── */
+/* Mörk kontrast mot resten av den ljusa sidan, enligt layouttabellen */
 footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 120px;
+  width: 100%;
   text-align: center;
   padding: 24px 20px;
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: 'Fira Code', monospace;
   font-size: 12px;
-  color: #8a8f86;
-  border-top: 1px solid #C9BFA9;
-  background-color: #EFEAE0;
+  color: #C9BFA9;
+  border-top: 2px solid #B9832E;
+  background-color: #1E2420;
 }
 
 /* ── DIVIDER ── */
@@ -436,7 +541,7 @@ footer {
 
 /* ── TABLET & DESKTOP (600px+) ── */
 @media (min-width: 600px) {
-  .nav-top { padding: 18px 40px; }
+  .nav-top { padding: 44px 40px; }
   .hamburger { display: none; }
   .nav-links {
     display: flex !important;
@@ -451,27 +556,33 @@ footer {
     align-items: center;
   }
   .nav-links li a {
-    padding: 0;
-    font-size: 13px;
-    border-bottom: none;
+    padding: 0 0 6px 0;
+    font-size: 19px;
+    border-bottom: 2px solid transparent;
   }
-  .hero { padding: 90px 40px 72px; }
-  .hero-inner { flex-direction: row; align-items: center; justify-content: space-between; gap: 40px; max-width: 1100px; }
-  .hero-text { order: 1; flex: 0 1 520px; }
+  .nav-links li a:hover,
+  .nav-links li a.active {
+    border-bottom-color: #B9832E;
+  }
+  .hero { padding: 120px 40px 72px; }
+  .hero-inner { flex-direction: row; align-items: center; justify-content: space-between; gap: 80px; max-width: 1200px; }
+  .hero-text { order: 1; flex: 0 1 580px; max-width: 580px; }
   .photo-wrap { order: 2; flex-shrink: 0; justify-content: flex-end; }
-  .photo-ring { width: 340px; height: 380px; }
+  .photo-ring { width: 440px; height: 550px; }
   .hero-name  { font-size: 58px; }
-  .section { padding: 90px 40px; }
+  .section { padding: 80px 40px; }
   .about-grid    { grid-template-columns: 1fr 1fr; }
   .skills-grid   { grid-template-columns: 1fr 1fr; }
   .projects-grid { grid-template-columns: 1fr 1fr; }
   .lia-box       { grid-template-columns: 1fr 1fr; }
-  .section-title { font-size: 32px; }
+  .section-title { font-size: 38px; }
 }
 
 @media (min-width: 900px) {
-  nav { padding: 20px 80px; }
+  nav { padding: 0 80px; }
   .hero { padding: 120px 80px 90px; }
-  .section { padding: 100px 80px; }
+  .section { padding: 80px 80px; }
   .hero-name { font-size: 66px; }
+  .photo-ring { width: 496px; height: 620px; }
+  .section-title { font-size: 40px; }
 }

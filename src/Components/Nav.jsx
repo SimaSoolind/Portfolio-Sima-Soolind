@@ -1,7 +1,51 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+
+// Sektionerna som menyn länkar till, i samma ordning som de ligger på sidan.
+const sections = [
+  { id: 'about', label: 'Om mig' },
+  { id: 'skills', label: 'Kompetens' },
+  { id: 'projects', label: 'Projekt' },
+  { id: 'lia', label: 'LIA' },
+  { id: 'contact', label: 'Kontakt' },
+]
 
 export default function Nav() {
   const [open, setOpen] = useState(false)
+  // Håller reda på vilken sektion som är synlig just nu, så vi kan visa
+  // ett Ockra-understreck under rätt länk i menyn.
+  const [active, setActive] = useState('')
+
+  useEffect(() => {
+    // IntersectionObserver låter webbläsaren själv tala om när en sektion
+    // syns i fönstret, istället för att vi räknar ut det manuellt vid varje
+    // scroll-event. Det är snabbare och belastar sidan mindre.
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActive(entry.target.id)
+          }
+        })
+      },
+      {
+        // rootMargin krymper den "synliga ytan" uppåt och nedåt.
+        // Resultatet: en sektion räknas som aktiv när den ligger i mitten
+        // av skärmen, strax under den fasta menyn — inte först när hela
+        // sektionen är synlig.
+        rootMargin: '-40% 0px -55% 0px',
+        threshold: 0,
+      }
+    )
+
+    sections.forEach(({ id }) => {
+      const el = document.getElementById(id)
+      if (el) observer.observe(el)
+    })
+
+    // Städar upp observeraren när komponenten tas bort, så den inte
+    // fortsätter köra i bakgrunden och läcker minne.
+    return () => observer.disconnect()
+  }, [])
 
   return (
     <nav>
@@ -12,11 +56,17 @@ export default function Nav() {
         </button>
       </div>
       <ul className={`nav-links${open ? ' open' : ''}`}>
-        <li><a href="#about"    onClick={() => setOpen(false)}>Om mig</a></li>
-        <li><a href="#skills"   onClick={() => setOpen(false)}>Kompetens</a></li>
-        <li><a href="#projects" onClick={() => setOpen(false)}>Projekt</a></li>
-        <li><a href="#lia"      onClick={() => setOpen(false)}>LIA</a></li>
-        <li><a href="#contact"  onClick={() => setOpen(false)}>Kontakt</a></li>
+        {sections.map(({ id, label }) => (
+          <li key={id}>
+            <a
+              href={`#${id}`}
+              className={active === id ? 'active' : ''}
+              onClick={() => setOpen(false)}
+            >
+              {label}
+            </a>
+          </li>
+        ))}
       </ul>
     </nav>
   )
