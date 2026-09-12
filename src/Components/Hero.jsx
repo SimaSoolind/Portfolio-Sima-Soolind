@@ -1,4 +1,4 @@
-import profilePhoto from "../assets/profil2.jpg"
+import profilePhoto from "../assets/profil3.jpg"
 
 export default function Hero() {
   return (

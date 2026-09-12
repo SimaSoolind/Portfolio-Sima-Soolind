@@ -3,50 +3,55 @@ export default function About() {
     <div id="about" className="section alt">
       <div className="section-inner">
         <div className="section-label">Om mig</div>
-        <h2 className="section-title">Fullstackutvecklare med inriktning på IT-säkerhet och AI</h2>
+        <h2 className="section-title">Fullstackutvecklare med inriktning på IT-säkerhet</h2>
 
         <p className="about-intro">
-          Jag är en systemutvecklare som brinner för att bygga moderna, säkra och användarvänliga
-          webbapplikationer. Min bakgrund har gett mig en djup förståelse för projektledning, tydlig
-          kommunikation och vikten av att alltid ha slutanvändaren i fokus. Jag skapar inte bara kod
-          som fungerar tekniskt – jag bygger system som är säkra, intuitiva och skapar verkligt värde.
+          Jag heter Sima Soolind. Jag studerar till fullstackutvecklare på Företagsuniversitetet.
+          <br /><br />
+          Innan dess jobbade jag 15 år med människor. Som undersköterska. Som frisör i sex år.
+          Sedan som lärare på vårdutbildningen på Arena Utbildning i sex år. Där höll jag i
+          undervisning, planering och kontakt med myndigheter och specialpedagoger.
+          <br /><br />
+          Jag ville ha en trygg framtid, med ett yrke jag kan växa i. Det var därför jag bytte
+          till utveckling.
+          <br /><br />
+          Jag är van att bryta ner svåra saker i mindre steg. Det gjorde jag som lärare. Nu gör
+          jag det när jag lär mig kod och säkerhet.
+          <br /><br />
+          <strong>Jag har både den sociala sidan och den tekniska sidan.</strong> Jag kan prata
+          med kunder och myndigheter, förklara svårt på ett enkelt sätt, och skriva säker kod.
+          Det är min styrka.
         </p>
 
         <div className="about-grid">
           <div className="about-card">
-            <h3>🔐 Säkerhet & Compliance (GRC)</h3>
+            <h3>Säkerhet & Compliance (GRC)</h3>
             <p>
-              Jag förstår vikten av att bygga system som följer lagar och regelverk. Med min vana vid
-              myndighetskontakt och dokumentation, kombinerat med min utbildning inom{' '}
-              <em>Dataskydd inom IT och AI</em> samt{' '}
-              <em>Ledning och samordning av cybersäkerhet</em>, bygger jag alltid med
-              "security first" som grundprincip.
+              Jag har läst <em>Dataskydd inom IT och AI</em> och <em>Ledning och samordning av
+              cybersäkerhet</em>. Från mina år med myndighetskontakt är jag van vid dokumentation
+              och regelverk. Jag bygger med säkerhet som grund, inte som ett sista steg.
             </p>
           </div>
           <div className="about-card">
-            <h3>🤖 AI-utveckling & Projektledning</h3>
+            <h3>AI-utveckling & Projektledning</h3>
             <p>
-              Jag kombinerar min tekniska utvecklarroll med en stark förmåga att driva processer
-              framåt. Genom kompetens inom{' '}
-              <em>Tillämpad AI för systemutveckling och test</em> och{' '}
-              <em>Att leda AI-projekt – från strategi till leverans</em> är jag rustad för att ta
-              komplexa initiativ hela vägen från idé till lanserad produkt.
+              Jag kombinerar utveckling med <em>Tillämpad AI för systemutveckling och test</em> och
+              <em> Att leda AI-projekt – från strategi till leverans</em>. Jag är van att driva ett
+              arbete från idé till färdig lösning.
             </p>
           </div>
           <div className="about-card">
-            <h3>⚡ Agilt Arbetssätt & Struktur</h3>
+            <h3>Struktur & Ansvar</h3>
             <p>
-              Jag är extremt strukturerad, van att ta eget ansvar och skicklig på att bryta ner
-              stora mål till konkreta, genomförbara steg. Jag är en kommunikativ lagspelare som
-              kan översätta komplexa tekniska krav till tydligt klarspråk.
+              Som lärare planerade jag kurser och samordnade med flera parter samtidigt. Jag är
+              van att ta eget ansvar och att förklara svåra saker enkelt.
             </p>
           </div>
           <div className="about-card">
-            <h3>🎯 UX & Användarfokus</h3>
+            <h3>Service & Användarfokus</h3>
             <p>
-              Med en lång historik av service och rådgivning har jag tränat upp en unik förmåga
-              att förstå olika människors behov. Denna insikt tar jag med mig in i
-              frontend-utvecklingen för att skapa gränssnitt som är tillgängliga och logiska för alla.
+              Från vård och frisöryrket har jag lång erfarenhet av att lyssna på vad någon faktiskt
+              behöver. Jag tar med mig det när jag bygger gränssnitt som ska vara enkla att använda.
             </p>
           </div>
         </div>

@@ -5,11 +5,15 @@
 }
 
 body {
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'Karla', system-ui, sans-serif;
   font-size: 17px;
-  background-color: #0E1117;
-  color: #F5F5F5;
+  background-color: #EFEAE0;
+  color: #1E2420;
   line-height: 1.6;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Bitter', Georgia, serif;
 }
 
 #root {

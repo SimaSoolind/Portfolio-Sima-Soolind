@@ -1,10 +1,15 @@
+/* ============================================
+   "Protokollet" — designsystem för Sima Soolinds portfolio
+   Papper, bläck, petrol, ockra, sand.
+   ============================================ */
+
 /* ── NAV ── */
 nav {
   position: fixed;
   top: 0; left: 0; right: 0;
   z-index: 100;
-  background-color: #0E1117;
-  border-bottom: 1px solid rgba(255,255,255,0.08);
+  background-color: #EFEAE0;
+  border-bottom: 1px solid #C9BFA9;
 }
 
 .nav-top {
@@ -14,7 +19,7 @@ nav {
   padding: 16px 20px;
 }
 
-.nav-logo { font-size: 15px; font-weight: 700; color: #C9A84C; letter-spacing: 0.06em; }
+.nav-logo { font-family: 'IBM Plex Mono', monospace; font-size: 15px; font-weight: 700; color: #1F5C56; letter-spacing: 0.06em; }
 
 .hamburger {
   display: flex;
@@ -30,7 +35,7 @@ nav {
   display: block;
   width: 24px;
   height: 2px;
-  background-color: #F5F5F5;
+  background-color: #1E2420;
   border-radius: 2px;
 }
 
@@ -39,7 +44,7 @@ nav {
   flex-direction: column;
   list-style: none;
   padding: 8px 20px 20px;
-  border-top: 1px solid rgba(255,255,255,0.06);
+  border-top: 1px solid #C9BFA9;
 }
 
 .nav-links.open { display: flex; }
@@ -48,28 +53,28 @@ nav {
   display: block;
   padding: 13px 0;
   font-size: 15px;
-  color: #8A929E;
+  color: #5B6058;
   text-decoration: none;
   font-weight: 500;
-  border-bottom: 1px solid rgba(255,255,255,0.05);
+  border-bottom: 1px solid #E2DCCC;
 }
 
 .nav-links li:last-child a { border-bottom: none; }
 
 /* ── PAGE WRAP ── */
 .page {
-  background-color: #0E1117;
+  background-color: #EFEAE0;
   padding-top: 56px;
 }
 
 /* ── SECTION ── */
 .section {
   padding: 64px 20px;
-  background-color: #0E1117;
+  background-color: #EFEAE0;
 }
 
 .section.alt {
-  background-color: #141820;
+  background-color: #F6F2E9;
 }
 
 .section-inner {
@@ -78,18 +83,19 @@ nav {
 }
 
 .section-label {
+  font-family: 'IBM Plex Mono', monospace;
   font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.18em;
+  font-weight: 500;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #C9A84C;
+  color: #1F5C56;
   margin-bottom: 10px;
 }
 
 .section-title {
   font-size: 26px;
-  font-weight: 700;
-  color: #F5F5F5;
+  font-weight: 600;
+  color: #1E2420;
   margin-bottom: 32px;
   line-height: 1.25;
 }
@@ -97,7 +103,9 @@ nav {
 /* ── HERO ── */
 .hero {
   padding: 72px 20px 60px;
-  background-color: #0E1117;
+  background:
+    radial-gradient(circle at 25% 30%, rgba(31,92,86,0.28) 0%, rgba(31,92,86,0.08) 32%, transparent 50%),
+    #EFEAE0;
 }
 
 .hero-inner {
@@ -116,8 +124,7 @@ nav {
 .photo-ring {
   width: 260px;
   height: 260px;
-  border-radius: 50%;
-  border: 2px solid rgba(201,168,76,0.3);
+  border: 1px solid #C9BFA9;
   padding: 6px;
   overflow: hidden;
   flex-shrink: 0;
@@ -126,8 +133,8 @@ nav {
 .photo-circle {
   width: 100%;
   height: 100%;
-  border-radius: 50%;
   overflow: hidden;
+  position: relative;
 }
 
 .photo-circle img {
@@ -139,14 +146,14 @@ nav {
 
 .hero-badge {
   display: inline-block;
-  background-color: rgba(201,168,76,0.12);
-  border: 1px solid rgba(201,168,76,0.3);
-  color: #C9A84C;
-  border-radius: 20px;
+  font-family: 'IBM Plex Mono', monospace;
+  background-color: rgba(31,92,86,0.10);
+  border: 1px solid rgba(31,92,86,0.35);
+  color: #1F5C56;
   padding: 5px 14px;
   font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.14em;
+  font-weight: 500;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   margin-bottom: 20px;
 }
@@ -155,22 +162,23 @@ nav {
   font-size: 48px;
   font-weight: 700;
   line-height: 1.05;
-  color: #F5F5F5;
+  color: #1E2420;
   margin-bottom: 10px;
 }
 
-.hero-name span { color: #C9A84C; }
+.hero-name span { color: #1F5C56; }
 
 .hero-subtitle {
-  font-size: 14px;
-  color: #8A929E;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 13px;
+  color: #5B6058;
   letter-spacing: 0.05em;
   margin-bottom: 16px;
 }
 
 .hero-desc {
-  font-size: 14px;
-  color: #8A929E;
+  font-size: 15px;
+  color: #5B6058;
   line-height: 1.75;
   margin-bottom: 32px;
   max-width: 480px;
@@ -178,24 +186,25 @@ nav {
 
 .btn-gold {
   display: inline-block;
-  background-color: #C9A84C;
-  color: #0E1117;
+  font-family: 'IBM Plex Mono', monospace;
+  background-color: #1F5C56;
+  color: #F3EFE4;
   padding: 13px 28px;
-  border-radius: 8px;
   font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-weight: 500;
+  letter-spacing: 0.06em;
   text-decoration: none;
+  transition: background-color .2s ease;
 }
+
+.btn-gold:hover { background-color: #164742; }
 
 /* ── KORT (delas av About, Skills och Projects) ── */
 .about-card,
 .skill-group,
 .project-card {
-  background-color: #1A1F2C;
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 14px;
+  background-color: #F6F2E9;
+  border: 1px solid #C9BFA9;
   padding: 28px;
   transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
@@ -204,17 +213,19 @@ nav {
 .skill-group:hover,
 .project-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.3), 0 0 0 1px rgba(201,168,76,0.3);
-  border-color: rgba(201,168,76,0.3);
+  border-color: #1F5C56;
 }
 
 /* ── ABOUT ── */
 .about-intro {
-  font-size: 15px;
-  color: #C8D0DC;
-  line-height: 1.8;
+  font-size: 16px;
+  color: #1E2420;
+  line-height: 1.85;
   margin-bottom: 36px;
+  max-width: 62ch;
 }
+
+.about-intro strong { color: #164742; }
 
 .about-grid {
   display: grid;
@@ -222,9 +233,9 @@ nav {
   gap: 14px;
 }
 
-.about-card h3 { font-size: 13px; font-weight: 600; color: #C9A84C; margin-bottom: 8px; }
-.about-card p  { font-size: 13px; color: #8A929E; line-height: 1.7; }
-.about-card em { color: #C8D0DC; font-style: italic; }
+.about-card h3 { font-size: 15px; font-weight: 600; color: #1E2420; margin-bottom: 8px; }
+.about-card p  { font-size: 14px; color: #5B6058; line-height: 1.7; }
+.about-card em { color: #1E2420; font-style: normal; font-weight: 600; }
 
 /* ── SKILLS ── */
 .skills-grid {
@@ -234,10 +245,11 @@ nav {
 }
 
 .skill-group h3 {
+  font-family: 'IBM Plex Mono', monospace;
   font-size: 11px;
-  font-weight: 600;
-  color: #C9A84C;
-  letter-spacing: 0.14em;
+  font-weight: 500;
+  color: #1F5C56;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   margin-bottom: 12px;
 }
@@ -245,25 +257,26 @@ nav {
 .tags { display: flex; flex-wrap: wrap; gap: 8px; }
 
 .tag {
-  background-color: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.1);
-  color: #C8D0DC;
+  font-family: 'IBM Plex Mono', monospace;
+  background-color: #EFEAE0;
+  border: 1px solid #C9BFA9;
+  color: #1E2420;
   padding: 5px 12px;
-  border-radius: 6px;
   font-size: 12px;
   font-weight: 500;
 }
 
 .tag-future {
   background-color: transparent;
-  border: 1px dashed rgba(255,255,255,0.2);
-  color: #5a6270;
+  border: 1px dashed #B9832E;
+  color: #8a6a30;
 }
 
 .skills-legend {
   margin-top: 24px;
+  font-family: 'IBM Plex Mono', monospace;
   font-size: 11px;
-  color: #5a6270;
+  color: #5B6058;
   display: flex;
   align-items: center;
   gap: 6px;
@@ -273,14 +286,12 @@ nav {
   display: inline-block;
   width: 8px;
   height: 8px;
-  border-radius: 2px;
-  background-color: rgba(255,255,255,0.15);
-  border: 1px solid rgba(255,255,255,0.2);
+  background-color: #1F5C56;
 }
 
 .legend-dot--future {
   background-color: transparent;
-  border: 1px dashed rgba(255,255,255,0.2);
+  border: 1px dashed #B9832E;
 }
 
 /* ── PROJECTS ── */
@@ -293,8 +304,8 @@ nav {
 .project-card { padding: 32px; }
 
 .project-icon  { font-size: 26px; margin-bottom: 12px; }
-.project-title { font-size: 16px; font-weight: 600; color: #F5F5F5; margin-bottom: 8px; }
-.project-desc  { font-size: 13px; color: #8A929E; line-height: 1.7; margin-bottom: 16px; }
+.project-title { font-family: 'Bitter', Georgia, serif; font-size: 18px; font-weight: 600; color: #1E2420; margin-bottom: 8px; }
+.project-desc  { font-size: 14px; color: #5B6058; line-height: 1.7; margin-bottom: 16px; }
 
 .project-bullets {
   list-style: none;
@@ -305,16 +316,17 @@ nav {
 }
 
 .project-bullets li {
-  font-size: 12px;
-  color: #8A929E;
+  font-size: 13px;
+  color: #5B6058;
   line-height: 1.6;
   padding-left: 12px;
-  border-left: 2px solid rgba(201,168,76,0.3);
+  border-left: 2px solid #1F5C56;
 }
 
 .bullet-label {
-  color: #C9A84C;
-  font-weight: 600;
+  font-family: 'IBM Plex Mono', monospace;
+  color: #1F5C56;
+  font-weight: 500;
 }
 
 .project-links {
@@ -325,98 +337,100 @@ nav {
 }
 
 .project-link {
-  font-size: 11px;
-  font-weight: 600;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  font-weight: 500;
   padding: 6px 14px;
-  border-radius: 6px;
   text-decoration: none;
-  border: 1px solid rgba(201,168,76,0.4);
-  color: #C9A84C;
-  letter-spacing: 0.05em;
+  border: 1px solid #1F5C56;
+  color: #1F5C56;
+  letter-spacing: 0.03em;
+  transition: background-color .2s ease, color .2s ease;
 }
 
+.project-link:hover { background-color: #1F5C56; color: #F3EFE4; }
+
 .project-link--private {
-  border-color: rgba(255,255,255,0.1);
-  color: #8A929E;
+  border-color: #C9BFA9;
+  color: #5B6058;
   cursor: default;
 }
+.project-link--private:hover { background-color: transparent; color: #5B6058; }
 
 .pills { display: flex; flex-wrap: wrap; gap: 6px; }
 .pill {
-  font-size: 10px;
-  background-color: rgba(201,168,76,0.12);
-  border: 1px solid rgba(201,168,76,0.25);
-  color: #C9A84C;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  background-color: #EFEAE0;
+  border: 1px solid #C9BFA9;
+  color: #1E2420;
   padding: 3px 10px;
-  border-radius: 20px;
   font-weight: 500;
 }
 
 /* ── LIA ── */
 .lia-box {
-  background-color: #1A1F2C;
-  border: 1px solid rgba(201,168,76,0.3);
-  border-radius: 14px;
+  background-color: #F6F2E9;
+  border: 1px solid #1F5C56;
   padding: 32px;
   display: grid;
   grid-template-columns: 1fr;
   gap: 32px;
-  transition: box-shadow 0.2s ease;
-}
-
-.lia-box:hover {
-  box-shadow: 0 8px 24px rgba(0,0,0,0.3), 0 0 0 1px rgba(201,168,76,0.4);
 }
 
 .lia-col h3 {
-  font-size: 11px; font-weight: 600; color: #C9A84C;
-  letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 14px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px; font-weight: 500; color: #1F5C56;
+  letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 14px;
 }
 
-.lia-col ul { list-style: none; font-size: 13px; color: #8A929E; line-height: 2.1; }
-.lia-col ul li::before { content: "→ "; color: #C9A84C; }
+.lia-col ul { list-style: none; font-size: 14px; color: #5B6058; line-height: 2.1; }
+.lia-col ul li::before { content: "→ "; color: #1F5C56; }
 
 /* ── CONTACT ── */
 .contact-box {
-  background-color: #1A1F2C;
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 14px;
+  background-color: #F6F2E9;
+  border: 1px solid #C9BFA9;
   padding: 32px 24px;
   text-align: center;
 }
 
-.contact-box p { font-size: 14px; color: #8A929E; margin-bottom: 24px; line-height: 1.75; }
+.contact-box p { font-size: 15px; color: #5B6058; margin-bottom: 24px; line-height: 1.75; max-width: 56ch; margin-left: auto; margin-right: auto; }
 
-.contact-links { display: flex; flex-direction: column; align-items: center; gap: 12px; margin-bottom: 24px; }
-.contact-link  { font-size: 13px; color: #C9A84C; text-decoration: none; font-weight: 500; }
-
-.social-links { display: flex; justify-content: center; gap: 12px; }
+.social-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; }
 .social-btn {
   display: inline-block;
-  border: 1px solid rgba(255,255,255,0.12);
-  color: #8A929E;
-  padding: 9px 22px;
-  border-radius: 8px;
-  font-size: 12px;
-  font-weight: 600;
+  font-family: 'IBM Plex Mono', monospace;
+  border: 1px solid #1E2420;
+  color: #1E2420;
+  padding: 10px 22px;
+  font-size: 13px;
+  font-weight: 500;
   text-decoration: none;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.04em;
+  transition: background-color .2s ease, color .2s ease, border-color .2s ease;
+}
+.social-btn:hover, .social-btn:focus-visible {
+  background-color: #1F5C56;
+  border-color: #1F5C56;
+  color: #F3EFE4;
 }
 
 /* ── FOOTER ── */
 footer {
   text-align: center;
   padding: 24px 20px;
+  font-family: 'IBM Plex Mono', monospace;
   font-size: 12px;
-  color: #3a4050;
-  border-top: 1px solid rgba(255,255,255,0.07);
-  background-color: #0E1117;
+  color: #8a8f86;
+  border-top: 1px solid #C9BFA9;
+  background-color: #EFEAE0;
 }
 
 /* ── DIVIDER ── */
 .divider {
   border: none;
-  border-top: 1px solid rgba(255,255,255,0.06);
+  border-top: 1px solid #C9BFA9;
   background: none;
 }
 
@@ -445,14 +459,13 @@ footer {
   .hero-inner { flex-direction: row; align-items: center; justify-content: space-between; gap: 40px; max-width: 1100px; }
   .hero-text { order: 1; flex: 0 1 520px; }
   .photo-wrap { order: 2; flex-shrink: 0; justify-content: flex-end; }
-  .photo-ring { width: 380px; height: 380px; }
+  .photo-ring { width: 340px; height: 380px; }
   .hero-name  { font-size: 58px; }
   .section { padding: 90px 40px; }
   .about-grid    { grid-template-columns: 1fr 1fr; }
   .skills-grid   { grid-template-columns: 1fr 1fr; }
   .projects-grid { grid-template-columns: 1fr 1fr; }
   .lia-box       { grid-template-columns: 1fr 1fr; }
-  .contact-links { flex-direction: row; justify-content: center; }
   .section-title { font-size: 32px; }
 }
 
