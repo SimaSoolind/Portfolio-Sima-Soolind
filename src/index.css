@@ -4,20 +4,38 @@
   box-sizing: border-box;
 }
 
+:root {
+  /* Skandinavisk palett. Petrol bär rubriker och länkar, Ockra är accent.
+     Ockra på Papper ger bara 2,8:1 i kontrast och duger därför inte till
+     text — den används till ikoner, streck och understrykningar. */
+  --bg: #EFEAE0;        /* Papper */
+  --surface: #F6F2E9;   /* ljusare papper, för bildytor */
+  --ink: #1E2420;       /* Bläck — brödtext */
+  --muted: #5B6058;     /* dämpad text, 5,4:1 mot Papper */
+  --sand: #C9BFA9;      /* Sand — ramar och toningar */
+  --rule: #D8D0BE;      /* sandton, hårfina linjer */
+  --heading: #1F5C56;   /* Petrol — rubriker och länkar, 6,4:1 */
+  --heading-dark: #164742;
+  --accent: #B9832E;    /* Ockra — ikoner och streck */
+  --measure: 880px;
+}
+
 body {
-  font-family: 'Karla', system-ui, sans-serif;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
   font-size: 17px;
-  background-color: #EFEAE0;
-  color: #1E2420;
-  line-height: 1.6;
+  line-height: 1.7;
+  background-color: var(--bg);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
 }
 
-h1, h2, h3, h4 {
-  font-family: 'Bitter', Georgia, serif;
+h1, h2, h3 {
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+  color: var(--heading);
 }
 
-#root {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
+a { color: inherit; }
+
+::selection { background: rgba(185,131,46,0.25); }

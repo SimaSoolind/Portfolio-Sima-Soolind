@@ -1,16 +1,88 @@
-# React + Vite
+# Portfolio – Sima Soolind
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Personlig portfolio-webbplats byggd i React och Vite. Presenterar mig,
+min kompetens, mina projekt och information till företag inför LIA
+2027.
 
-Currently, two official plugins are available:
+## Projektstruktur
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Appen är byggd som en enda sida (single page) med sex sektioner som
+renderas efter varandra i `App.jsx`: Hero, Om mig, Kompetens, Projekt,
+LIA och Kontakt. Varje sektion är en egen komponent i
+`src/Components/`. Scroll-animationer sköts av GSAP med ScrollTrigger,
+och menyn (`Nav.jsx`) håller reda på vilken sektion som är synlig just
+nu med webbläsarens IntersectionObserver, utan något extra bibliotek.
 
-## React Compiler
+## Installation
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Kräver Node.js (18 eller senare).
 
-## Expanding the ESLint configuration
+```bash
+npm install
+npm run dev
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Appen körs då på `http://localhost:5173`.
+
+Övriga kommandon:
+
+```bash
+npm run build     # bygger en produktionsversion i /dist
+npm run preview   # förhandsvisar produktionsbygget lokalt
+npm run lint      # kör ESLint
+```
+
+## Färgpalett — "Protokollet"
+
+Designsystemet bygger på fem färger, definierade som CSS-variabler i
+`src/styles.css`.
+
+| Namn   | Hex       | Roll                          |
+|--------|-----------|--------------------------------|
+| Papper | `#EFEAE0` | Bakgrund                       |
+| Bläck  | `#1E2420` | Brödtext, rubriker              |
+| Petrol | `#1F5C56` | Sekundär accent — länkar, kort  |
+| Ockra  | `#B9832E` | Huvudaccent — knappar, ikoner   |
+| Sand   | `#C9BFA9` | Struktur — ramar, linjer, kort  |
+
+Typsnitt: **Inter** för rubriker och brödtext, **Fira Code** för
+etiketter, badges och kod-liknande text (till exempel tech-stack-taggar
+och menyns logotyp).
+
+## Komponenter
+
+| Fil | Beskrivning |
+|---|---|
+| `App.jsx` | Sätter ihop sidan, registrerar GSAP-animationerna |
+| `Nav.jsx` | Fast meny med scroll-spy — markerar aktiv sektion |
+| `Hero.jsx` | Namn, roll, kort pitch och profilbild |
+| `About.jsx` | Bio-text och fyra kompetenskort med Feather-ikoner |
+| `Skills.jsx` | Tech-stack grupperad i kategorier, med varumärkeslogotyper |
+| `Projects.jsx` | Tre projektkort med beskrivning, teknikstack och länkar |
+| `Lia.jsx` | LIA-perioder och information till arbetsgivare |
+| `Contact.jsx` | Kontaktruta med länkar till LinkedIn och GitHub |
+| `Footer.jsx` | Sidfot med copyright |
+
+## Filstruktur
+
+```
+portfolio-LIA/
+├── index.html
+├── package.json
+├── README.md
+└── src/
+    ├── main.jsx
+    ├── App.jsx
+    ├── index.css          # globala grundstilar (reset, bastypsnitt)
+    ├── styles.css          # hela designsystemet — färgvariabler, layout, komponenter
+    ├── assets/             # profilbilder
+    └── Components/
+        ├── Nav.jsx
+        ├── Hero.jsx
+        ├── About.jsx
+        ├── Skills.jsx
+        ├── Projects.jsx
+        ├── Lia.jsx
+        ├── Contact.jsx
+        └── Footer.jsx
+```

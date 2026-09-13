@@ -1,4 +1,3 @@
-// Linjeikoner (Feather-ikoner) till varje kompetens-kort — minimalistiska, Ockra
 import { FiShield, FiCpu, FiLayers, FiUsers } from "react-icons/fi"
 
 export default function About() {
@@ -6,7 +5,7 @@ export default function About() {
     <div id="about" className="section">
       <div className="section-inner">
         <div className="section-label">Om mig</div>
-        <h2 className="section-title">Fullstackutvecklare med inriktning på IT-säkerhet</h2>
+        <h2 className="section-title">Vem jag är</h2>
 
         <p className="about-intro">
           Jag heter Sima Soolind. Jag studerar till fullstackutvecklare på Företagsuniversitetet.
@@ -29,6 +28,7 @@ export default function About() {
         <div className="about-grid">
           <div className="about-card">
             <FiShield className="about-icon" />
+
             <h3>Säkerhet & Compliance (GRC)</h3>
             <p>
               Jag har läst <em>Dataskydd inom IT och AI</em> och <em>Ledning och samordning av
@@ -38,6 +38,7 @@ export default function About() {
           </div>
           <div className="about-card">
             <FiCpu className="about-icon" />
+
             <h3>AI-utveckling & Projektledning</h3>
             <p>
               Jag kombinerar utveckling med <em>Tillämpad AI för systemutveckling och test</em> och
@@ -47,6 +48,7 @@ export default function About() {
           </div>
           <div className="about-card">
             <FiLayers className="about-icon" />
+
             <h3>Struktur & Ansvar</h3>
             <p>
               Som lärare planerade jag kurser och samordnade med flera parter samtidigt. Jag är
@@ -55,6 +57,7 @@ export default function About() {
           </div>
           <div className="about-card">
             <FiUsers className="about-icon" />
+
             <h3>Service & Användarfokus</h3>
             <p>
               Från vård och frisöryrket har jag lång erfarenhet av att lyssna på vad någon faktiskt

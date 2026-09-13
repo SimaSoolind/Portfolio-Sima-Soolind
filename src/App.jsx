@@ -17,39 +17,19 @@ gsap.registerPlugin(ScrollTrigger)
 
 export default function App() {
   useEffect(() => {
+    // Diskreta inledningar. Respekterar den som bett om mindre rörelse.
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+
     const ctx = gsap.context(() => {
-      // Hero-animationer
-      gsap.from('.hero-badge',    { opacity: 0, y: -10, duration: 0.5, delay: 0.2 })
-      gsap.from('.hero-name',     { opacity: 0, y: 20,  duration: 0.6, delay: 0.35 })
-      gsap.from('.hero-subtitle', { opacity: 0, y: 20,  duration: 0.6, delay: 0.5 })
-      gsap.from('.hero-desc',     { opacity: 0, y: 20,  duration: 0.6, delay: 0.65 })
-      gsap.from('.btn-gold',      { opacity: 0, y: 20,  duration: 0.6, delay: 0.8 })
-      gsap.from('.photo-ring',    { opacity: 0, scale: 0.88, duration: 0.7, delay: 0.45 })
-
-      // Scroll-animationer
-      gsap.from('.about-card', {
-        scrollTrigger: { trigger: '.about-grid', start: 'top 82%' },
-        opacity: 0, y: 28, duration: 0.5, stagger: 0.1
+      gsap.from('.hero-text > *', {
+        opacity: 0, y: 12, duration: 0.5, stagger: 0.07, ease: 'power2.out',
       })
 
-      gsap.from('.skill-group', {
-        scrollTrigger: { trigger: '.skills-grid', start: 'top 82%' },
-        opacity: 0, y: 28, duration: 0.5, stagger: 0.1
-      })
-
-      gsap.from('.project-card', {
-        scrollTrigger: { trigger: '.projects-grid', start: 'top 82%' },
-        opacity: 0, y: 28, duration: 0.6, stagger: 0.18, ease: 'power2.out'
-      })
-
-      gsap.from('.lia-box', {
-        scrollTrigger: { trigger: '.lia-box', start: 'top 85%' },
-        opacity: 0, y: 24, duration: 0.6
-      })
-
-      gsap.from('.contact-box', {
-        scrollTrigger: { trigger: '.contact-box', start: 'top 85%' },
-        opacity: 0, y: 24, duration: 0.6
+      gsap.utils.toArray('.section').forEach((section) => {
+        gsap.from(section, {
+          scrollTrigger: { trigger: section, start: 'top 88%' },
+          opacity: 0, y: 16, duration: 0.5, ease: 'power2.out',
+        })
       })
     })
 
@@ -61,15 +41,10 @@ export default function App() {
       <Nav />
       <div className="page">
         <Hero />
-        <hr className="divider" />
         <About />
-        <hr className="divider" />
         <Skills />
-        <hr className="divider" />
         <Projects />
-        <hr className="divider" />
         <Lia />
-        <hr className="divider" />
         <Contact />
         <Footer />
       </div>

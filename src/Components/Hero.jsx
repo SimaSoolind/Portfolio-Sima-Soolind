@@ -2,22 +2,27 @@ import profilePhoto from "../assets/profil3.jpg"
 
 export default function Hero() {
   return (
-    <div className="hero">
+    <div className="hero" id="top">
       <div className="hero-inner">
         <div className="hero-text">
-          <div className="hero-badge">Söker LIA 2027 · v. 11–24 & v. 33–43</div>
-          <h1 className="hero-name"><span>Sima</span><br/>Soolind</h1>
-          <div className="hero-subtitle">Fullstackutvecklare · IT-säkerhet & AI</div>
+          <span className="hero-badge">Fullstackutvecklare</span>
+
+          <h1 className="hero-name">Hej, jag är <span>Sima.</span></h1>
+
           <p className="hero-desc">
-            Jag bygger moderna, säkra webbapplikationer och söker just nu en LIA-plats för 2027 (v. 11–24 samt v. 33–43). Kostnadsfritt för företaget — fullt försäkrad via skolan.
+            Jag bygger moderna, säkra webbapplikationer. Innan jag började utveckla arbetade jag
+            15 år med människor — som undersköterska, frisör och lärare. Det är den kombinationen
+            jag tar med mig in i tekniken.
           </p>
+
+          <p className="hero-meta">Söker LIA-plats 2027 · v. 11–24 &amp; v. 33–43</p>
+
           <a href="#projects" className="btn-gold">Se mina projekt →</a>
         </div>
+
         <div className="photo-wrap">
-          <div className="photo-ring">
-            <div className="photo-circle">
-              <img src={profilePhoto} alt="Sima Soolind" />
-            </div>
+          <div className="photo-circle">
+            <img src={profilePhoto} alt="Sima Soolind" />
           </div>
         </div>
       </div>

@@ -49,13 +49,14 @@ export default function Nav() {
 
   return (
     <nav>
-      <div className="nav-top">
-        <div className="nav-logo">SS</div>
-        <button className="hamburger" onClick={() => setOpen(!open)} aria-label="Meny">
-          <span></span><span></span><span></span>
-        </button>
-      </div>
-      <ul className={`nav-links${open ? ' open' : ''}`}>
+      <div className="nav-inner">
+        <div className="nav-top">
+          <a className="nav-logo" href="#top">Sima Soolind</a>
+          <button className="hamburger" onClick={() => setOpen(!open)} aria-label="Meny">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+        <ul className={`nav-links${open ? ' open' : ''}`}>
         {sections.map(({ id, label }) => (
           <li key={id}>
             <a
@@ -67,7 +68,8 @@ export default function Nav() {
             </a>
           </li>
         ))}
-      </ul>
+        </ul>
+      </div>
     </nav>
   )
 }
