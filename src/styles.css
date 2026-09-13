@@ -41,8 +41,6 @@
   background-color: var(--accent);
 }
 
-.divider { display: none; }
-
 /* Läsbar radlängd oavsett hur bred spalten är. */
 .about-intro,
 .hero-desc,
