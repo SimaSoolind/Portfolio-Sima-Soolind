@@ -199,6 +199,86 @@ nav {
   display: block;
 }
 
+/* ── MOBIL: genomskinlig ruta med sned överkant ovanpå fotot (som i Figma-mallen) ──
+   Rutan är halvgenomskinlig och gör fotot bakom suddigt, så att texten går att läsa.
+   En tunn vinröd linje (::before) följer den sneda kanten. */
+/* Mörk yta under fotot: rutan täcker bara fotots nedersta kant, så att hela bilden syns */
+.photo-wrap { position: relative; padding-bottom: 90px; }
+
+.hero-card {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding-top: 5px;
+}
+
+/* Den vinröda linjen: en 5 px smal remsa längs den sneda kanten */
+.hero-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: var(--accent);
+  clip-path: polygon(0 36px, 100% 0, 100% 5px, 0 41px);
+}
+
+/* Mörkgrå (som i Figma), 78 % täckande + suddighet. Vit text får tillräcklig kontrast
+   även där den vita tröjan syns bakom (WCAG kräver 4,5:1). */
+.hero-card-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 16px;
+  padding: 40px 20px 16px;
+  background-color: rgba(58, 58, 58, 0.78);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  clip-path: polygon(0 36px, 100% 0, 100% 100%, 0 100%);
+}
+
+.hero-card-hello { font-size: 14px; color: #D6D2CC; }
+.hero-card-name {
+  font-family: 'Raleway', 'Inter', system-ui, sans-serif;
+  font-size: 26px;
+  font-weight: 800;
+  line-height: 1.15;
+  color: #FFFFFF;
+}
+.hero-card-role {
+  margin-top: 4px;
+  font-family: 'Fira Code', ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 12px;
+  color: #BDB8B0;
+}
+
+/* Ikonlänkarna står under varandra till höger, klickytan är 44 × 44 px */
+.hero-card-links { display: flex; flex-direction: column; }
+.hero-card-links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  color: #FFFFFF;
+}
+.hero-card-links a:hover { color: #E8C9CE; }
+.hero-card-links a:focus-visible { outline: 2px solid #FFFFFF; outline-offset: 2px; }
+.hero-card-links svg { width: 22px; height: 22px; }
+
+/* På mobil står namn och roll i rutan ovanför. Rubriken (h1) finns kvar för skärmläsare
+   men döljs visuellt, och etiketten döljs helt. */
+@media (max-width: 959px) {
+  .hero-text .hero-badge { display: none; }
+  .hero-name {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+}
+
 .hero-badge {
   display: inline-block;
   font-family: 'Fira Code', ui-monospace, SFMono-Regular, Menlo, monospace;
@@ -522,6 +602,14 @@ nav {
   margin: 0 0 24px;
 }
 
+/* Liten rubrik ovanför varje kodexempel, så flera exempel går att skilja åt */
+.project-code-title {
+  margin: 0 0 8px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
 .project-code pre {
   margin: 0;
   padding: 18px 20px;
@@ -544,9 +632,52 @@ nav {
   display: flex;
   flex-direction: column;
   gap: 4px;
-  margin-top: 10px;
   font-size: 14px;
   color: var(--muted);
+}
+
+/* Knappen "Visa koden": tydlig knapp med vinröd kant, klickytan minst 44 px hög */
+.project-code-details summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  margin-top: 12px;
+  padding: 0 18px;
+  border: 2px solid var(--accent);
+  border-radius: 6px;
+  background: transparent;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--accent);
+  list-style: none;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+.project-code-details summary::-webkit-details-marker { display: none; }
+
+/* Pilen vrids nedåt när koden är öppen */
+.project-code-details summary::before {
+  content: "▸";
+  content: "▸" / ""; /* tom alt-text: skärmläsare läser inte upp pilen */
+  font-size: 18px;
+  line-height: 1;
+  transition: transform 0.15s ease;
+}
+.project-code-details[open] summary::before { transform: rotate(90deg); }
+/* Visar "Visa koden" när koden är stängd och "Dölj koden" när den är öppen */
+.project-code-details .code-hide { display: none; }
+.project-code-details[open] .code-show { display: none; }
+.project-code-details[open] .code-hide { display: inline; }
+.project-code-details summary:hover { background-color: var(--accent); color: #FFFFFF; }
+.project-code-details summary:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+.project-code-details pre { margin-top: 12px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .project-code-details summary::before { transition: none; }
 }
 
 .project-code figcaption strong { color: var(--ink); font-weight: 600; }
@@ -794,11 +925,15 @@ footer {
   .photo-wrap {
     margin: 0;
     padding-top: 56px;
+    padding-bottom: 0;
     background-color: transparent;
     align-items: flex-end;
   }
 
   .photo-frame { width: clamp(420px, 42vw, 600px); max-width: none; }
+
+  /* Rutan med namn används bara på mobil */
+  .hero-card { display: none; }
 
   .hero-name { font-size: 68px; }
 }

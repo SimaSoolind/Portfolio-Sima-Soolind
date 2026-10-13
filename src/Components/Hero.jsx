@@ -1,4 +1,5 @@
 import profilePhoto from "../assets/sima-leende-frilagd.webp"
+import { FaLinkedin, FaGithub } from "react-icons/fa"
 import { useLanguage } from "../i18n/useLanguage"
 
 export default function Hero() {
@@ -28,6 +29,26 @@ export default function Hero() {
         <div className="photo-wrap">
           <div className="photo-frame">
             <img src={profilePhoto} alt={t.hero.photoAlt} />
+          </div>
+
+          {/* Bara på mobil: mörk ruta med sned överkant ovanpå bildens nederkant (som i Figma).
+              Texten är aria-hidden, eftersom skärmläsare redan får rubriken (h1) längre ner. */}
+          <div className="hero-card">
+            <div className="hero-card-inner">
+              <div aria-hidden="true">
+                <p className="hero-card-hello">{t.hero.greeting}</p>
+                <p className="hero-card-name">Sima Soolind</p>
+                <p className="hero-card-role">{t.hero.badge}</p>
+              </div>
+              <div className="hero-card-links">
+                <a href="https://www.linkedin.com/in/sima-soolind" target="_blank" rel="noreferrer" aria-label="LinkedIn">
+                  <FaLinkedin aria-hidden="true" />
+                </a>
+                <a href="https://github.com/SimaSoolind" target="_blank" rel="noreferrer" aria-label="GitHub">
+                  <FaGithub aria-hidden="true" />
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </div>

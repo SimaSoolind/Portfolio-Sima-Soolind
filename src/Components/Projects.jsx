@@ -15,6 +15,72 @@ const projects = [
       "/projects/parishhub-predikan.png",
       "/projects/parishhub-kontakter.png",
     ],
+    codes: [
+      {
+        snippet: `// Ger mallen bara om den är granskad, annars null.
+// Alla vyer som visar liturgi går igenom den här funktionen.
+export function approvedTemplate(template: LiturgyTemplate | null): LiturgyTemplate | null {
+  if (!template || template.status !== "approved") return null
+  const lines = [...template.lines].sort((a, b) => a.sortOrder - b.sortOrder)
+  return { ...template, lines: lines.map(withoutPendingTexts) }
+}
+
+// Tar bort svenska och uttal som väntar på granskning. Ger en kopia.
+export function withoutPendingTexts(line: LiturgyLine): LiturgyLine {
+  const pending = line.pending ?? []
+  return {
+    ...line,
+    swedish: pending.includes("swedish") ? undefined : line.swedish,
+    pronunciation: pending.includes("pronunciation") ? undefined : line.pronunciation,
+  }
+}
+
+// Test med Vitest
+it("ger null för utkast och saknad mall", () => {
+  expect(approvedTemplate({ ...TEMPLATE, status: "draft" })).toBeNull()
+  expect(approvedTemplate(null)).toBeNull()
+})`,
+      },
+      {
+        snippet: `const DASHBOARD_TAB_KEYS = ["oversikt", "att-gora", "narvaro", "gudstjanst", "kontakt"] as const
+type DashboardTab = (typeof DASHBOARD_TAB_KEYS)[number]
+
+// Type guard: texten från adressen är verkligen en flik (i stället för "as")
+function isDashboardTab(value: string | undefined): value is DashboardTab {
+  return DASHBOARD_TAB_KEYS.some((key) => key === value)
+}
+
+// Vilken komponent som visar vilken flik. Saknas en flik klagar TypeScript.
+const TAB_CONTENT: Record<DashboardTab, ComponentType> = {
+  oversikt: OverviewTab,
+  "att-gora": TodoTab,
+  narvaro: AttendanceTab,
+  gudstjanst: ServicesTab,
+  kontakt: ContactTab,
+}
+
+// Okänd flik i adressen leder tillbaka till Översikt
+export function Dashboard() {
+  const { tab } = useParams()
+  if (tab !== undefined && !isDashboardTab(tab)) return <Navigate to="/" replace />
+  const Content = TAB_CONTENT[tab ?? "oversikt"]
+
+  return (
+    <Stack>
+      <WelcomeCard staff tabs={DASHBOARD_TABS} />
+      <Content />
+    </Stack>
+  )
+}
+
+// Test med Vitest
+it("okänd flik i adressen leder tillbaka till Översikt", async () => {
+  const router = renderAt("/hem/finns-inte")
+  await screen.findByRole("link", { name: "Översikt" })
+  expect(router.state.location.pathname).toBe("/")
+})`,
+      },
+    ],
     tech: ["React", "TypeScript", "Vite", "Tailwind CSS", "Zod", "TanStack Query", "i18next", "Vitest"],
     links: [{ type: "private" }],
   },
@@ -27,8 +93,9 @@ const projects = [
       "/projects/bibel-tolkning.png",
       "/projects/bibel-liturgiboken.png",
     ],
-    code: {
-      snippet: `// Bygger en bibelreferens av kapitel och versnummer.
+    codes: [
+      {
+        snippet: `// Bygger en bibelreferens av kapitel och versnummer.
 // Följer numren på varandra blir det ett intervall, annars en lista.
 export function byggReferens(chapter, verseNumbers) {
   if (!chapter || !verseNumbers?.length) return ''
@@ -46,7 +113,8 @@ export function byggReferens(chapter, verseNumbers) {
 it('listar numren med komma när de har luckor', () => {
   expect(byggReferens(25, [1, 2, 4])).toBe('25:1, 2, 4')
 })`,
-    },
+      },
+    ],
     tech: ["React 19", "Vite", "React Router", "Tailwind CSS", "Node.js", "PostgreSQL", "Gemini", "Vitest"],
     links: [{ type: "private" }],
   },
@@ -109,19 +177,36 @@ export default function Projects() {
               )}
 
               {/* Kodexempel visas som text, inte som bild. Text går att läsa i
-                  mobilen, kan läsas upp av en skärmläsare och kan kopieras. */}
-              {p.code && text.code && (
-                <figure className="project-code">
-                  <pre tabIndex={0} aria-label={`${tp.codeLabel} ${text.title}`}>
-                    <code>{p.code.snippet}</code>
-                  </pre>
-                  <figcaption>
-                    <span><strong>{tp.challenge}</strong> {text.code.challenge}</span>
-                    <span><strong>{tp.solution}</strong> {text.code.solution}</span>
-                    <span><strong>{tp.result}</strong> {text.code.result}</span>
-                  </figcaption>
-                </figure>
-              )}
+                  mobilen, kan läsas upp av en skärmläsare och kan kopieras.
+                  Ett projekt kan ha flera exempel. Texten med samma plats i
+                  texts.js (codes) hör ihop med koden här. */}
+              {p.codes?.map((code, i) => {
+                const codeText = text.codes?.[i]
+                if (!codeText) return null
+                return (
+                  <figure className="project-code" key={codeText.title}>
+                    {/* Rubrik och utmaning/lösning/resultat syns alltid */}
+                    <figcaption>
+                      <h4 className="project-code-title">{codeText.title}</h4>
+                      <span><strong>{tp.challenge}</strong> {codeText.challenge}</span>
+                      <span><strong>{tp.solution}</strong> {codeText.solution}</span>
+                      <span><strong>{tp.result}</strong> {codeText.result}</span>
+                    </figcaption>
+                    {/* Koden döljs tills besökaren klickar, så att sidan blir kortare.
+                        <details> fungerar utan JavaScript, med tangentbord och med skärmläsare. */}
+                    <details className="project-code-details">
+                      {/* Texten byts till "Dölj koden" när koden är öppen (styrs med CSS) */}
+                      <summary>
+                        <span className="code-show">{tp.showCode}</span>
+                        <span className="code-hide">{tp.hideCode}</span>
+                      </summary>
+                      <pre tabIndex={0} aria-label={`${tp.codeLabel} ${text.title}: ${codeText.title}`}>
+                        <code>{code.snippet}</code>
+                      </pre>
+                    </details>
+                  </figure>
+                )
+              })}
 
               <p className="project-tech">{p.tech.join(" · ")}</p>
 

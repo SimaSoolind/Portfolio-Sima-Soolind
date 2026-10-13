@@ -15,8 +15,8 @@ export const texts = {
     },
     hero: {
       badge: 'Fullstackutvecklare · IT-säkerhet',
-      greeting: 'Hej, jag är',
-      desc: 'Jag bygger moderna, säkra webbapplikationer. Innan jag började utveckla arbetade jag 16 år med människor — som undersköterska, frisör och lärare. Det är den kombinationen jag tar med mig in i tekniken.',
+      greeting: 'Hej, mitt namn är',
+      desc: 'Jag bygger moderna, säkra webbapplikationer. Innan jag började utveckla arbetade jag 16 år med människor som undersköterska, frisör och lärare. Det är den kombinationen jag tar med mig in i tekniken.',
       meta: 'Söker LIA-plats 2027 · v. 11–24 & v. 33–43',
       projectsButton: 'Se mina projekt →',
       contactButton: 'Kontakta mig',
@@ -83,6 +83,8 @@ export const texts = {
       "challenge": "Utmaning:",
       "solution": "Lösning:",
       "result": "Resultat:",
+      "showCode": "Visa koden",
+      "hideCode": "Dölj koden",
       "items": {
         "parishhub": {
           "title": "ParishHub",
@@ -121,6 +123,20 @@ export const texts = {
             {
               "alt": "Kontaktlista där telefonnummer och e-post är delvis dolda",
               "caption": "Kontaktuppgifter är delvis dolda och visningen loggas"
+            }
+          ],
+          "codes": [
+            {
+              "title": "Bara granskad liturgi visas",
+              "challenge": "Svenska översättningar som ännu inte är granskade får aldrig visas på projektorn.",
+              "solution": "En ren funktion utan React som alla vyer med liturgi går igenom. Den tar bort ogranskad text utan att ändra originalet.",
+              "result": "Regeln finns på ett ställe och är testad. Ändras regeln behöver bara en funktion ändras."
+            },
+            {
+              "title": "Säkra flikar på prästens startsida",
+              "challenge": "Varje flik har en egen adress, och adressen är text som vem som helst kan ändra.",
+              "solution": "Flikarna står i en lista som typen byggs från. En type guard kontrollerar adressen innan den används, i stället för \"as\".",
+              "result": "En påhittad flik leder tillbaka till Översikt, och TypeScript klagar om en flik saknar innehåll."
             }
           ]
         },
@@ -163,11 +179,14 @@ export const texts = {
               "caption": "Liturgiboken"
             }
           ],
-          "code": {
-            "challenge": "En bugg gjorde att 395 dagars läsningar aldrig visades, utan något felmeddelande.",
-            "solution": "Referensen byggs nu direkt ur rådata.",
-            "result": "Tester ser till att felet inte kommer tillbaka."
-          }
+          "codes": [
+            {
+              "title": "Rätt bibelreferens",
+              "challenge": "En bugg gjorde att 395 dagars läsningar aldrig visades, utan något felmeddelande.",
+              "solution": "Referensen byggs nu direkt ur rådata.",
+              "result": "Tester ser till att felet inte kommer tillbaka."
+            }
+          ]
         },
         "sm-bygg": {
           "title": "SM-Bygg",
@@ -289,6 +308,8 @@ export const texts = {
       "challenge": "Challenge:",
       "solution": "Solution:",
       "result": "Result:",
+      "showCode": "Show the code",
+      "hideCode": "Hide the code",
       "items": {
         "parishhub": {
           "title": "ParishHub",
@@ -327,6 +348,20 @@ export const texts = {
             {
               "alt": "Contact list where phone numbers and email addresses are partly hidden",
               "caption": "Contact details are partly hidden and viewing is logged"
+            }
+          ],
+          "codes": [
+            {
+              "title": "Only reviewed liturgy is shown",
+              "challenge": "Swedish translations that have not been reviewed yet must never be shown on the projector.",
+              "solution": "A pure function without React that every view showing liturgy goes through. It removes unreviewed text without changing the original.",
+              "result": "The rule lives in one place and is tested. If the rule changes, only one function needs to change."
+            },
+            {
+              "title": "Safe tabs on the priest's home page",
+              "challenge": "Each tab has its own address, and the address is text that anyone can change.",
+              "solution": "The tabs are listed once and the type is built from that list. A type guard checks the address before it is used, instead of \"as\".",
+              "result": "A made-up tab leads back to Overview, and TypeScript complains if a tab has no content."
             }
           ]
         },
@@ -369,11 +404,14 @@ export const texts = {
               "caption": "The Liturgy book"
             }
           ],
-          "code": {
-            "challenge": "A bug meant that 395 days of readings were never shown, without any error message.",
-            "solution": "The reference is now built directly from the raw data.",
-            "result": "Tests make sure the bug does not come back."
-          }
+          "codes": [
+            {
+              "title": "Correct Bible reference",
+              "challenge": "A bug meant that 395 days of readings were never shown, without any error message.",
+              "solution": "The reference is now built directly from the raw data.",
+              "result": "Tests make sure the bug does not come back."
+            }
+          ]
         },
         "sm-bygg": {
           "title": "SM-Bygg",
