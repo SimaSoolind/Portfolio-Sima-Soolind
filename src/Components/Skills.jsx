@@ -1,14 +1,14 @@
-// Samtliga områden ingår i utbildningen och är avklarade inför LIA-start
-// våren 2027 — därför markeras inga enskilda rader. Backend ligger först
-// eftersom det är där arbetet ligger just nu.
+// Alla områden ingår i utbildningen och är klara före LIA-start i vecka 11, 2027.
+// Backend och Säker applikationslivscykel läses hösten 2026, Java i januari 2027.
+// Backend ligger först eftersom det är där arbetet ligger just nu.
 const categories = [
   {
     title: "Backend & databaser",
-    skills: ["Node.js & Express", "MongoDB", "REST API:er", "Java"],
+    skills: ["Node.js & Express", "PostgreSQL", "MongoDB", "REST API:er", "Java"],
   },
   {
     title: "Frontend & mobil",
-    skills: ["HTML & CSS", "JavaScript", "React & Vite", "Tailwind CSS", "GSAP", "Context API", "TypeScript", "React Native"],
+    skills: ["HTML & CSS", "JavaScript", "React & Vite", "Tailwind CSS", "GSAP", "Context API", "TypeScript", "Zod"],
   },
   {
     title: "IT-säkerhet & AI",
@@ -22,7 +22,7 @@ const categories = [
   },
   {
     title: "Verktyg & metodik",
-    skills: ["Git & GitHub", "Agila metoder", "JWT & Auth"],
+    skills: ["Git & GitHub", "Agila metoder", "JWT & Auth", "Testning (Vitest, React Testing Library)"],
   },
 ]
 
@@ -43,8 +43,9 @@ export default function Skills() {
         </div>
 
         <p className="skills-note">
-          Samtliga områden ingår i min utbildning och är avklarade inför LIA-start i vecka 11,
-          2027. Backend, databaser och säkerhet arbetar jag med löpande i ParishHub.
+          Backend-utveckling och Säker applikationslivscykel läser jag nu, hösten 2026, och Java
+          i januari 2027. Alla områden är klara före LIA-start i vecka 11, 2027. Backend,
+          databaser och säkerhet arbetar jag med löpande i ParishHub.
         </p>
       </div>
     </div>

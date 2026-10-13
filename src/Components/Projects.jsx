@@ -5,14 +5,15 @@ const projects = [
     id: "parishhub",
     title: "ParishHub",
     status: { text: "Under utveckling — levereras januari 2027", live: false },
-    desc: "Fullstack SaaS-system för församlingsadministration. Designat för att hantera känslig data säkert och effektivisera prästens dagliga arbete.",
+    desc: "Webbapp för församlingar, byggd för S:t Georgs kyrka. Prästen planerar gudstjänster och medlemmar. Under gudstjänsten visas liturgin på projektorn på koptiska, arabiska och svenska.",
     bullets: [
-      { label: "Säkerhet & GDPR", text: "Tvåfaktorsautentisering (2FA), rollbaserad åtkomst (JWT) och krypterade databasfält för privata själavårdsanteckningar." },
-      { label: "AI-transkription i realtid", text: "Mikrofonen fångar gudstjänsten och AI:n översätter och transkriberar live till svenska och arabiska på skärmar i kyrkan." },
-      { label: "Smarta automatiseringar", text: "Automatiserad spårning av närvaro, GDPR-samtycken och påminnelser om födelsedagar." },
+      { label: "AI-tolkning live", text: "Prästens predikan på arabiska visas som svensk text på projektorn, och tvärtom. Riktningen låses medan tolkningen pågår." },
+      { label: "Säkerhet & GDPR", text: "Rollbaserad behörighet (RBAC), validering av all data med Zod och automatisk radering av tolkad text. Hotmodell med STRIDE." },
+      { label: "Kvalitet", text: "959 automatiska tester och CI på GitHub som kör typkontroll, lint, tester och npm audit." },
+      { label: "Nästa steg", text: "Backend med Node.js, PostgreSQL och Prisma, med inloggning via JWT och bcrypt." },
     ],
     images: [],
-    tech: ["TypeScript", "Node.js", "Express", "MongoDB", "JWT", "React Native"],
+    tech: ["React", "TypeScript", "Vite", "Tailwind CSS", "Zod", "TanStack Query", "i18next", "Vitest"],
     links: [{ text: "Privat repo – visas vid förfrågan", private: true }],
   },
   {
@@ -23,11 +24,11 @@ const projects = [
     bullets: [
       { label: "Offline-first arkitektur", text: "Hämtar från externt API med lokal bible.json som fallback via try/catch — appen kraschar aldrig." },
       { label: "8 custom hooks & 6 contexts", text: "Modulär kodbas med 23 sidor, global AudioContext för avbrottsfri uppspelning och debounce-sökning i hela bibeln." },
-      { label: "AI-integration", text: "OpenAI-assistent tolkar bibelverser och anpassar språket dynamiskt efter vald läsprofil (barn, ungdom, fördjupning)." },
+      { label: "AI-integration", text: "AI-assistent tolkar bibelverser och anpassar språket dynamiskt efter vald läsprofil (barn, ungdom, fördjupning)." },
       { label: "Avancerad datahantering", text: "Favoriter, anteckningar och inställningar sparas i localStorage. Context API delar data globalt utan prop drilling." },
     ],
     images: [],
-    tech: ["React 18", "React Router v6", "Context API", "OpenAI API", "GSAP", "Vite"],
+    tech: ["React 18", "React Router v6", "Context API", "GSAP", "Vite"],
     links: [{ text: "Privat repo – visas vid förfrågan", private: true }],
   },
   {
@@ -73,7 +74,8 @@ export default function Projects() {
                 ))}
               </ul>
 
-              {p.images.length > 0 ? (
+              {/* Bilder visas bara när projektet har några. Annars visas ingenting. */}
+              {p.images.length > 0 && (
                 <div className="project-shots">
                   {p.images.map((img) => (
                     <figure className="project-shot" key={img.src}>
@@ -81,11 +83,6 @@ export default function Projects() {
                       {img.caption && <figcaption>{img.caption}</figcaption>}
                     </figure>
                   ))}
-                </div>
-              ) : (
-                <div className="project-shots-empty">
-                  Lägg bilder i <code>public/projects/</code> och lista dem i{" "}
-                  <code>images</code> högst upp i den här filen.
                 </div>
               )}
 

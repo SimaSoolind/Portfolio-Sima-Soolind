@@ -52,7 +52,7 @@ export default function Nav() {
       <div className="nav-inner">
         <div className="nav-top">
           <a className="nav-logo" href="#top">Sima Soolind</a>
-          <button className="hamburger" onClick={() => setOpen(!open)} aria-label="Meny">
+          <button className="hamburger" onClick={() => setOpen(!open)} aria-label="Meny" aria-expanded={open}>
             <span></span><span></span><span></span>
           </button>
         </div>

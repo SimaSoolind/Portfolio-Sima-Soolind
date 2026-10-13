@@ -30,12 +30,20 @@ body {
 }
 
 h1, h2, h3 {
-  font-weight: 600;
+  /* Raleway för rubriker (från Figma-mallen), Inter för brödtext */
+  font-family: 'Raleway', 'Inter', system-ui, sans-serif;
+  font-weight: 700;
   line-height: 1.25;
   letter-spacing: -0.015em;
   color: var(--heading);
 }
 
 a { color: inherit; }
+
+/* Synlig fokusram för tangentbordsanvändare (WCAG 2.4.7) */
+:focus-visible {
+  outline: 3px solid var(--heading);
+  outline-offset: 3px;
+}
 
 ::selection { background: rgba(185,131,46,0.25); }
