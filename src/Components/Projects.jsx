@@ -1,5 +1,5 @@
 // Bilder: lägg filen i public/projects/ och referera med sökväg från roten.
-// images: [{ src: "/projects/guds-ord-sok.png", alt: "Sökvyn i appen", caption: "Debounce-sökning i hela bibeln" }]
+// images: [{ src: "/projects/bibel-start.png", alt: "Startsidan med snabbval", caption: "Startsidan med snabbval" }]
 const projects = [
   {
     id: "parishhub",
@@ -12,23 +12,57 @@ const projects = [
       { label: "Kvalitet", text: "959 automatiska tester och CI på GitHub som kör typkontroll, lint, tester och npm audit." },
       { label: "Nästa steg", text: "Backend med Node.js, PostgreSQL och Prisma, med inloggning via JWT och bcrypt." },
     ],
-    images: [],
+    images: [
+      { src: "/projects/parishhub-projektor.png", alt: "Projektorn visar en rad ur liturgin på koptiska, arabiska och svenska", caption: "Projektorn: liturgin på tre språk samtidigt" },
+      { src: "/projects/parishhub-styr-skarmen.png", alt: "Teknikerns vy med raden som visas nu, nästa rad och knappar för att byta rad", caption: "Styr skärmen: teknikern byter rad med knapp eller klickare" },
+      { src: "/projects/parishhub-predikan.png", alt: "Ruta där prästen väljer om predikan ska delas, sparas privat eller raderas", caption: "Prästen bestämmer om predikan sparas (GDPR)" },
+      { src: "/projects/parishhub-kontakter.png", alt: "Kontaktlista där telefonnummer och e-post är delvis dolda", caption: "Kontaktuppgifter är delvis dolda och visningen loggas" },
+    ],
     tech: ["React", "TypeScript", "Vite", "Tailwind CSS", "Zod", "TanStack Query", "i18next", "Vitest"],
     links: [{ text: "Privat repo – visas vid förfrågan", private: true }],
   },
   {
-    id: "guds-ord",
-    title: "Guds ord",
+    id: "bibel-appen",
+    title: "Bibel-appen",
     status: { text: "Under utveckling — levereras januari 2027", live: false },
-    desc: "Interaktiv webbapplikation för Svenska Koptisk-Ortodoxa Kyrkan. Digitaliserar Bibeln (73 böcker), bönboken Agbeya, liturgier och den liturgiska kalendern.",
+    desc: "Digital bibel och bönbok på svenska och arabiska för svensk-arabisktalande koptisk-ortodoxa församlingar. Påbörjad i kursen JavaScript Advanced och React och under fortsatt utveckling. Gratis och kräver ingen inloggning.",
     bullets: [
-      { label: "Offline-first arkitektur", text: "Hämtar från externt API med lokal bible.json som fallback via try/catch — appen kraschar aldrig." },
-      { label: "8 custom hooks & 6 contexts", text: "Modulär kodbas med 23 sidor, global AudioContext för avbrottsfri uppspelning och debounce-sökning i hela bibeln." },
-      { label: "AI-integration", text: "AI-assistent tolkar bibelverser och anpassar språket dynamiskt efter vald läsprofil (barn, ungdom, fördjupning)." },
-      { label: "Avancerad datahantering", text: "Favoriter, anteckningar och inställningar sparas i localStorage. Context API delar data globalt utan prop drilling." },
+      { label: "Innehåll", text: "Hela Bibeln på svenska och arabiska inklusive apokryferna, Agbeya, Liturgiboken och Stilla veckan med ljud, och dagens läsningar med koptiskt datum." },
+      { label: "Kyrkofädernas tolkningar", text: "Kapitel för kapitel, tre verk att jämföra. Översättning till svenska pågår, Matteusevangeliet är klart." },
+      { label: "Tillgänglighet", text: "Böner och liturgi går att lyssna på, textstorleken går att ändra och arabiskan visas höger-till-vänster. Knappar är minst 44 pixlar och animationer stängs av vid minskad rörelse." },
+      { label: "AI och säkerhet", text: "Gemini översätter tolkningarna till lättläst svenska. AI-förklaringar efter profil är avstängda tills de flyttas till en egen server, så att API-nyckeln aldrig ligger i webbläsaren. Minsta möjliga databasbehörighet och GDPR artikel 9." },
     ],
-    images: [],
-    tech: ["React 18", "React Router v6", "Context API", "GSAP", "Vite"],
+    images: [
+      { src: "/projects/bibel-start.png", alt: "Startsidan med snabbval till Dagens läsningar, Agbeya, Stilla veckan, Liturgiboken och Katameros", caption: "Startsidan med snabbval" },
+      { src: "/projects/bibel-matteus.png", alt: "Matteus kapitel 4 med knapp till kyrkofädernas tolkning och språkval", caption: "Bibeltexten med länk till tolkningen och språkval" },
+      { src: "/projects/bibel-tolkning.png", alt: "Kyrkofädernas tolkning av Matteus 4 med tre verk att jämföra", caption: "Kyrkofädernas tolkningar, tre verk att jämföra" },
+      { src: "/projects/bibel-liturgiboken.png", alt: "Liturgiboken med de olika liturgierna", caption: "Liturgiboken" },
+    ],
+    code: {
+      // Utmaning, lösning och resultat visas som tre rader under kodexemplet
+      challenge: "En bugg gjorde att 395 dagars läsningar aldrig visades, utan något felmeddelande.",
+      solution: "Referensen byggs nu direkt ur rådata.",
+      result: "Tester ser till att felet inte kommer tillbaka.",
+      snippet: `// Bygger en bibelreferens av kapitel och versnummer.
+// Följer numren på varandra blir det ett intervall, annars en lista.
+export function byggReferens(chapter, verseNumbers) {
+  if (!chapter || !verseNumbers?.length) return ''
+
+  const forsta = verseNumbers[0]
+  const sista = verseNumbers[verseNumbers.length - 1]
+  const foljerPaVarandra = verseNumbers.every((nummer, index) => nummer === forsta + index)
+
+  if (!foljerPaVarandra) return \`\${chapter}:\${verseNumbers.join(', ')}\`
+  if (verseNumbers.length === 1) return \`\${chapter}:\${forsta}\`
+  return \`\${chapter}:\${forsta}–\${sista}\`
+}
+
+// Test med Vitest
+it('listar numren med komma när de har luckor', () => {
+  expect(byggReferens(25, [1, 2, 4])).toBe('25:1, 2, 4')
+})`,
+    },
+    tech: ["React 19", "Vite", "React Router", "Tailwind CSS", "Node.js", "PostgreSQL", "Gemini", "Vitest"],
     links: [{ text: "Privat repo – visas vid förfrågan", private: true }],
   },
   {
@@ -84,6 +118,21 @@ export default function Projects() {
                     </figure>
                   ))}
                 </div>
+              )}
+
+              {/* Kodexempel visas som text, inte som bild. Text går att läsa i
+                  mobilen, kan läsas upp av en skärmläsare och kan kopieras. */}
+              {p.code && (
+                <figure className="project-code">
+                  <pre tabIndex={0} aria-label={`Kodexempel från ${p.title}`}>
+                    <code>{p.code.snippet}</code>
+                  </pre>
+                  <figcaption>
+                    <span><strong>Utmaning:</strong> {p.code.challenge}</span>
+                    <span><strong>Lösning:</strong> {p.code.solution}</span>
+                    <span><strong>Resultat:</strong> {p.code.result}</span>
+                  </figcaption>
+                </figure>
               )}
 
               <p className="project-tech">{p.tech.join(" · ")}</p>

@@ -53,7 +53,7 @@ nav {
   position: sticky;
   top: 0;
   z-index: 100;
-  background-color: rgba(239,234,224,0.92);
+  background-color: rgba(251,249,246,0.92);
   backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--rule);
 }
@@ -71,9 +71,11 @@ nav {
   padding: 18px 0;
 }
 
+/* Namnet fungerar som logga: samma typsnitt som rubrikerna, större och fetare */
 .nav-logo {
-  font-size: 15px;
-  font-weight: 600;
+  font-family: 'Raleway', 'Inter', system-ui, sans-serif;
+  font-size: 18px;
+  font-weight: 800;
   letter-spacing: -0.01em;
   text-decoration: none;
   color: var(--ink);
@@ -108,49 +110,65 @@ nav {
 .nav-links li a {
   display: block;
   padding: 9px 0;
-  font-size: 15px;
-  color: var(--muted);
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--ink);
   text-decoration: none;
   transition: color 0.15s ease;
 }
 
-.nav-links li a:hover,
-.nav-links li a.active { color: var(--ink); }
+.nav-links li a:hover { color: var(--accent); }
+
+/* Aktiv länk: vinröd text med ett tunt vinrött understreck */
+.nav-links li a.active {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 6px;
+}
 
 /* ── HERO ──
-   Papper som bas, en mjuk sandtoning bakom porträttet och en svag petrolton
-   längst ner. Toningarna är lokala för Hero — resten av sidan är enfärgad. */
+   Uppbyggd som Figma-mallen: en ljus sida med texten och en mörk sida med fotot.
+   Mobil: den mörka ytan med fotot ligger överst i full bredd, texten under.
+   Stor skärm (960 px): texten till vänster, den mörka ytan med sned kant till höger
+   i full höjd, och fotot står längst ner på den mörka ytan.
+   overflow: hidden gör att den sneda ytan aldrig ger sidledsrullning. */
 .hero {
-  padding: 72px 24px 72px;
-  background:
-    radial-gradient(circle at 78% 42%, rgba(201,191,169,0.45) 0%, rgba(201,191,169,0.12) 48%, transparent 72%),
-    linear-gradient(to bottom, transparent 0%, transparent 84%, rgba(31,92,86,0.09) 100%);
+  position: relative;
+  padding: 0 24px;
+  overflow: hidden;
+  background-color: var(--bg);
 }
 
 .hero-inner {
+  position: relative;
   max-width: var(--measure);
   margin: 0 auto;
   display: flex;
   flex-direction: column-reverse;
-  gap: 44px;
 }
 
-/* Porträttet i sandfärgad ram med subtil petrolskugga. */
-.photo-circle {
-  width: 100%;
-  max-width: 260px;
-  padding: 10px;
-  background-color: var(--sand);
-  border-radius: 14px;
-  box-shadow: 0 10px 30px rgba(31,92,86,0.20);
+.hero-text { padding: 44px 0 72px; }
+
+/* Mobil: den mörka ytan går ut i hela skärmens bredd (negativ marginal tar bort sidpaddingen) */
+.photo-wrap {
+  margin: 0 -24px;
+  padding-top: 40px;
+  background-color: var(--ink);
+  display: flex;
+  justify-content: center;
 }
 
-.photo-circle img {
+/* Det frilagda fotot (utan bakgrund). Ingen ram eller skugga, så inga fotokanter syns. */
+.photo-frame {
   width: 100%;
-  aspect-ratio: 4 / 5;
-  object-fit: cover;
+  max-width: 380px;
+}
+
+.photo-frame img {
+  width: 100%;
+  height: auto;
   display: block;
-  border-radius: 8px;
 }
 
 .hero-badge {
@@ -173,7 +191,7 @@ nav {
   margin-bottom: 22px;
 }
 
-.hero-name span { color: var(--heading); }
+.hero-name span { color: var(--accent); }
 
 .hero-desc {
   font-size: 18px;
@@ -190,7 +208,7 @@ nav {
 .btn-gold {
   display: inline-block;
   background-color: var(--accent);
-  color: var(--ink);
+  color: #FFFFFF;
   padding: 13px 26px;
   border-radius: 8px;
   font-size: 15px;
@@ -199,9 +217,50 @@ nav {
   transition: background-color 0.15s ease;
 }
 
-.btn-gold:hover { background-color: #A5732A; }
+.btn-gold:hover { background-color: var(--accent-dark); }
+
+/* Knapparna på startsidan bredvid varandra, under varandra om det inte får plats */
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* Andraknappen: vit med tunn mörk kant. Blir mörk när man håller musen över den. */
+.btn-outline {
+  display: inline-block;
+  background-color: transparent;
+  color: var(--ink);
+  border: 1px solid var(--ink);
+  padding: 12px 25px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.btn-outline:hover { background-color: var(--ink); color: #FFFFFF; }
 
 /* ── ABOUT ── */
+/* Porträttet: svartvitt med en tunn vinröd linje bakom, för ett lyxigt men lugnt uttryck. */
+.about-top { margin-bottom: 56px; }
+.about-top .about-intro { margin-bottom: 40px; }
+.about-photo { margin: 0; position: relative; max-width: 360px; }
+.about-photo::before {
+  content: "";
+  position: absolute;
+  inset: 16px -16px -16px 16px;
+  border: 2px solid var(--accent);
+  z-index: 0;
+}
+.about-photo img { position: relative; z-index: 1; display: block; width: 100%; height: auto; }
+/* Mjuk skugga under porträttet, så att bilden lyfts fram från ramen */
+.about-photo img { box-shadow: 0 24px 48px rgba(22, 22, 22, 0.18); }
+@media (min-width: 960px) {
+  .about-top { display: grid; grid-template-columns: 1fr 360px; gap: 72px; align-items: center; }
+  .about-top .about-intro { margin-bottom: 0; }
+}
 .about-intro {
   font-size: 18px;
   line-height: 1.8;
@@ -241,33 +300,149 @@ nav {
   color: var(--ink);
 }
 
-/* ── SKILLS ── */
-.skills-list { border-top: 1px solid var(--rule); }
-
-.skill-group {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 4px;
-  padding: 22px 0;
-  border-bottom: 1px solid var(--rule);
-}
-
-.skill-group h3 {
+/* ── TIDSLINJE (Om mig) ──
+   Mobil: stegen under varandra med en lodrät linje till vänster.
+   Stor skärm: fyra steg bredvid varandra med en vågrät linje överst.
+   Punkterna är vinröda. Steget där jag är nu har en fylld vinröd punkt. */
+.journey-heading {
   font-size: 15px;
-  font-weight: 500;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   color: var(--muted);
-  letter-spacing: 0;
+  margin: 48px 0 24px;
 }
 
-.skill-items {
-  font-size: 16px;
-  line-height: 1.75;
+.journey {
+  list-style: none;
+  position: relative;
+  margin-bottom: 56px;
+  padding-left: 28px;
+  border-left: 1px solid var(--rule);
 }
 
-.skills-note {
-  margin-top: 24px;
+.journey-step {
+  position: relative;
+  padding-bottom: 32px;
+}
+
+.journey-step:last-child { padding-bottom: 0; }
+
+.journey-dot {
+  position: absolute;
+  left: -35px;
+  top: 4px;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background-color: var(--bg);
+  border: 2px solid var(--accent);
+}
+
+.journey-step--current .journey-dot { background-color: var(--accent); }
+
+.journey-time {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+
+.journey-title {
+  font-size: 18px;
+  line-height: 1.35;
+  color: var(--heading);
+  /* Långa ord som "Fullstackutvecklare" bryts med bindestreck i smala kolumner */
+  hyphens: auto;
+  overflow-wrap: break-word;
+}
+
+.journey-step--current .journey-title { color: var(--accent); }
+
+.journey-place {
   font-size: 14px;
   color: var(--muted);
+  margin-top: 2px;
+}
+
+.journey-text {
+  font-size: 15px;
+  line-height: 1.65;
+  margin-top: 8px;
+}
+
+/* ── SKILLS ──
+   Ikoner i rutnät (inspirerat av Figma-mallen). Ikonerna är grå och blir vinröda
+   när man håller musen över rutan. Kurser utan logotyp visas som rader med en ikon. */
+.skill-heading {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 40px 0 18px;
+}
+
+.skill-heading:first-of-type { margin-top: 0; }
+.skill-columns .skill-heading { margin-top: 40px; }
+
+.skill-tiles {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(104px, 1fr));
+  gap: 12px;
+}
+
+.skill-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 18px 8px 14px;
+  background-color: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  font-size: 14px;
+  text-align: center;
+  transition: border-color 0.15s ease;
+}
+
+.skill-tile-icon {
+  font-size: 30px;
+  color: var(--muted);
+  transition: color 0.15s ease;
+}
+
+.skill-tile:hover { border-color: var(--accent); }
+.skill-tile:hover .skill-tile-icon { color: var(--accent); }
+
+.course-list {
+  list-style: none;
+  margin-top: 18px;
+}
+
+.course-list li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--rule);
+  font-size: 16px;
+}
+
+.course-icon {
+  flex-shrink: 0;
+  font-size: 18px;
+  color: var(--accent);
+}
+
+/* Säkerhet och Arbetssätt: under varandra på mobil, bredvid varandra på stor skärm */
+.skill-columns {
+  display: grid;
+  grid-template-columns: 1fr;
+  column-gap: 48px;
 }
 
 /* ── PROJECTS ── */
@@ -331,6 +506,41 @@ nav {
   color: var(--muted);
 }
 
+/* Kodexempel under projektbilderna. Mörk ruta med ljus text ger hög kontrast,
+   och rutan rullar i sidled i stället för att bryta raderna på smal skärm. */
+.project-code {
+  margin: 0 0 24px;
+}
+
+.project-code pre {
+  margin: 0;
+  padding: 18px 20px;
+  background: var(--ink);
+  color: #F3EFE8;
+  border-radius: 8px;
+  overflow-x: auto;
+  font-family: 'Fira Code', ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 13px;
+  line-height: 1.6;
+  tab-size: 2;
+}
+
+.project-code pre:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.project-code figcaption {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 10px;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.project-code figcaption strong { color: var(--ink); font-weight: 600; }
+
 .project-tech {
   font-size: 14px;
   color: var(--muted);
@@ -347,7 +557,7 @@ nav {
   font-size: 15px;
   color: var(--heading);
   text-decoration: none;
-  border-bottom: 1px solid rgba(185,131,46,0.55);
+  border-bottom: 1px solid rgba(122,28,42,0.45);
   padding-bottom: 1px;
   transition: border-color 0.15s ease;
 }
@@ -401,14 +611,14 @@ nav {
   font-size: 17px;
   color: var(--heading);
   text-decoration: none;
-  border-bottom: 1px solid rgba(185,131,46,0.5);
+  border-bottom: 1px solid rgba(122,28,42,0.45);
   padding-bottom: 3px;
   transition: border-color 0.15s ease;
 }
 
 .contact-link:hover { border-bottom-color: var(--accent); }
 
-.contact-icon { width: 18px; height: 18px; }
+.contact-icon { width: 22px; height: 22px; }
 
 /* ── FOOTER ── */
 footer {
@@ -432,14 +642,20 @@ footer {
   gap: 16px;
 }
 
+/* Klickytan blir 44 × 44 px, så att länken är lätt att träffa på mobil */
 .footer-links a {
   color: var(--muted);
   display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
   transition: color 0.15s ease;
 }
 
 .footer-links a:hover { color: var(--ink); }
-.footer-links svg { width: 18px; height: 18px; }
+/* Större ikoner i sidfoten, så att de syns tydligare */
+.footer-links svg { width: 24px; height: 24px; }
 
 /* ── 700px+ ── */
 @media (min-width: 700px) {
@@ -460,26 +676,13 @@ footer {
 
   .nav-links li a { padding: 0; }
 
-  .hero { padding: 104px 24px 96px; }
-
-  .hero-inner {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    gap: 64px;
-  }
-
-  .hero-text { flex: 1 1 auto; }
-  .photo-wrap { flex: 0 0 auto; }
-  .photo-circle { width: 320px; max-width: none; }
-
-  .hero-name { font-size: 62px; }
+  .hero-name { font-size: 56px; }
 
   .section { padding: 112px 24px; }
   .section-title { font-size: 40px; }
 
   .about-grid { grid-template-columns: 1fr 1fr; gap: 44px 48px; }
-  .skill-group { grid-template-columns: 200px 1fr; gap: 24px; }
+  .skill-columns { grid-template-columns: 1fr 1fr; }
   .lia-grid { grid-template-columns: 1fr 1fr; }
   .project-shots { grid-template-columns: 1fr 1fr; }
 }
@@ -503,3 +706,82 @@ footer {
 }
 
 .status-dot--live { background-color: var(--heading); }
+
+/* ── HERO PÅ STOR SKÄRM ──
+   Den mörka ytan (::before) täcker högra delen i full höjd, med sned vänsterkant
+   som i Figma-mallen. En tunn vinröd linje följer den sneda kanten (::after). */
+@media (min-width: 960px) {
+  .hero { min-height: 640px; }
+
+  .hero::before,
+  .hero::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 50%;
+    clip-path: polygon(24% 0, 100% 0, 100% 100%, 0 100%);
+  }
+
+  /* Vinröd kant: samma form, flyttad 6 px åt vänster, bakom den mörka ytan */
+  .hero::after {
+    background-color: var(--accent);
+    transform: translateX(-6px);
+    z-index: 0;
+  }
+
+  .hero::before {
+    background-color: var(--ink);
+    z-index: 1;
+  }
+
+  .hero-inner {
+    z-index: 2;
+    max-width: 1200px;
+    min-height: 640px;
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: space-between;
+    gap: 48px;
+  }
+
+  .hero-text {
+    align-self: center;
+    max-width: 500px;
+    padding: 96px 0;
+  }
+
+  /* Fotot står längst ner på den mörka ytan */
+  .photo-wrap {
+    margin: 0;
+    padding-top: 56px;
+    background-color: transparent;
+    align-items: flex-end;
+  }
+
+  .photo-frame { width: clamp(420px, 42vw, 600px); max-width: none; }
+
+  .hero-name { font-size: 68px; }
+}
+
+/* ── TIDSLINJE PÅ STOR SKÄRM ── fyra steg bredvid varandra */
+@media (min-width: 960px) {
+  .journey {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+    padding-left: 0;
+    padding-top: 28px;
+    border-left: none;
+    border-top: 1px solid var(--rule);
+  }
+
+  .journey-step { padding-bottom: 0; }
+
+  .journey-dot {
+    left: 0;
+    top: -35px;
+  }
+}
+

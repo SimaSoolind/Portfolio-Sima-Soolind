@@ -12,7 +12,7 @@ const sections = [
 export default function Nav() {
   const [open, setOpen] = useState(false)
   // Håller reda på vilken sektion som är synlig just nu, så vi kan visa
-  // ett Ockra-understreck under rätt länk i menyn.
+  // ett vinrött understreck under rätt länk i menyn.
   const [active, setActive] = useState('')
 
   useEffect(() => {
@@ -62,6 +62,8 @@ export default function Nav() {
             <a
               href={`#${id}`}
               className={active === id ? 'active' : ''}
+              // aria-current talar om för skärmläsare vilken del av sidan man är på
+              aria-current={active === id ? 'location' : undefined}
               onClick={() => setOpen(false)}
             >
               {label}
