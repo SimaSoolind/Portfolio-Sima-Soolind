@@ -1,25 +1,27 @@
+import { useLanguage } from "../i18n/useLanguage"
+
 export default function Lia() {
+  // t.lia innehåller LIA-informationen på valt språk
+  const { t } = useLanguage()
+  const l = t.lia
+
   return (
     <div id="lia" className="section">
       <div className="section-inner">
-        <div className="section-label">LIA &amp; examensarbete</div>
-        <h2 className="section-title">Information för företag</h2>
+        <div className="section-label">{l.label}</div>
+        <h2 className="section-title">{l.title}</h2>
 
         <div className="lia-grid">
           <div className="lia-col">
-            <h3>Perioder</h3>
+            <h3>{l.periodsHeading}</h3>
             <ul>
-              <li>LIA 1 — v. 11–24, 2027 (50 YH-p)</li>
-              <li>LIA 2 — v. 33–43, 2027 (40 YH-p)</li>
-              <li>Examensarbete — v. 44–51, 2027 (30 YH-p)</li>
+              {l.periods.map((period) => <li key={period}>{period}</li>)}
             </ul>
           </div>
           <div className="lia-col">
-            <h3>För er som arbetsgivare</h3>
+            <h3>{l.employerHeading}</h3>
             <ul>
-              <li>Helt kostnadsfritt</li>
-              <li>Fullt försäkrad via skolan</li>
-              <li>Examensarbetet kan förläggas hos er</li>
+              {l.employer.map((item) => <li key={item}>{item}</li>)}
             </ul>
           </div>
         </div>

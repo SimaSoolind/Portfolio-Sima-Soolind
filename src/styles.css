@@ -81,6 +81,34 @@ nav {
   color: var(--ink);
 }
 
+/* Språkknappen och menyknappen ligger bredvid varandra uppe till höger */
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Språkknapp: SV | EN. Klickytan är minst 44 px hög för att vara lätt att träffa. */
+.lang-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  padding: 0 4px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+}
+
+.lang-toggle:hover { color: var(--ink); }
+.lang-divider { color: var(--rule); }
+.lang-active { color: var(--accent); font-weight: 700; }
+
 .hamburger {
   display: flex;
   flex-direction: column;
@@ -243,24 +271,6 @@ nav {
 .btn-outline:hover { background-color: var(--ink); color: #FFFFFF; }
 
 /* ── ABOUT ── */
-/* Porträttet: svartvitt med en tunn vinröd linje bakom, för ett lyxigt men lugnt uttryck. */
-.about-top { margin-bottom: 56px; }
-.about-top .about-intro { margin-bottom: 40px; }
-.about-photo { margin: 0; position: relative; max-width: 360px; }
-.about-photo::before {
-  content: "";
-  position: absolute;
-  inset: 16px -16px -16px 16px;
-  border: 2px solid var(--accent);
-  z-index: 0;
-}
-.about-photo img { position: relative; z-index: 1; display: block; width: 100%; height: auto; }
-/* Mjuk skugga under porträttet, så att bilden lyfts fram från ramen */
-.about-photo img { box-shadow: 0 24px 48px rgba(22, 22, 22, 0.18); }
-@media (min-width: 960px) {
-  .about-top { display: grid; grid-template-columns: 1fr 360px; gap: 72px; align-items: center; }
-  .about-top .about-intro { margin-bottom: 0; }
-}
 .about-intro {
   font-size: 18px;
   line-height: 1.8;
@@ -620,6 +630,26 @@ nav {
 
 .contact-icon { width: 22px; height: 22px; }
 
+/* Kontakt: text och länkar bredvid det svartvita porträttet på större skärmar */
+.contact-top { display: grid; gap: 56px; }
+
+/* Porträttet: svartvitt med en tunn vinröd linje bakom, för ett lyxigt men lugnt uttryck. */
+.portrait-photo { margin: 0; position: relative; max-width: 360px; }
+.portrait-photo::before {
+  content: "";
+  position: absolute;
+  inset: 16px -16px -16px 16px;
+  border: 2px solid var(--accent);
+  z-index: 0;
+}
+.portrait-photo img { position: relative; z-index: 1; display: block; width: 100%; height: auto; }
+/* Mjuk skugga under porträttet, så att bilden lyfts fram från ramen */
+.portrait-photo img { box-shadow: 0 28px 56px rgba(22, 22, 22, 0.32); }
+
+@media (min-width: 960px) {
+  .contact-top { grid-template-columns: 1fr 360px; gap: 72px; align-items: start; }
+}
+
 /* ── FOOTER ── */
 footer {
   padding: 32px 24px 48px;
@@ -665,7 +695,15 @@ footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding-top: 18px;
+    padding-bottom: 18px;
   }
+
+  /* På större skärmar läggs logga, länkar och språkknapp på en rad:
+     nav-top "försvinner" som låda så att dess innehåll blir egna delar av raden. */
+  .nav-top { display: contents; }
+  .nav-links { order: 1; margin-left: auto; }
+  .nav-actions { order: 2; margin-left: 28px; }
 
   .nav-links {
     display: flex !important;

@@ -1,4 +1,6 @@
 import { FaLinkedin, FaGithub } from "react-icons/fa"
+import { useLanguage } from "../i18n/useLanguage"
+import portratt from "../assets/sima-portratt-sv.webp"
 
 const links = [
   { Icon: FaLinkedin, label: "LinkedIn", href: "https://www.linkedin.com/in/sima-soolind" },
@@ -6,16 +8,20 @@ const links = [
 ]
 
 export default function Contact() {
+  // t.contact innehåller kontaktdelens texter på valt språk
+  const { t } = useLanguage()
+
   return (
     <div id="contact" className="section">
       <div className="section-inner">
-        <div className="section-label">Kontakt</div>
-        <h2 className="section-title">Låt oss prata framtid</h2>
+        {/* Rubrik, text och länkar till vänster, porträttet till höger i samma höjd som rubriken.
+            På mobil hamnar bilden under. */}
+        <div className="contact-top">
+        <div>
+        <div className="section-label">{t.contact.label}</div>
+        <h2 className="section-title">{t.contact.title}</h2>
 
-        <p className="contact-text">
-          Är du nyfiken på vad jag kan bidra med? Jag söker LIA-plats från vecka 11, 2027 —
-          kostnadsfritt för er och fullt försäkrad via skolan. Hör gärna av dig via LinkedIn.
-        </p>
+        <p className="contact-text">{t.contact.text}</p>
 
         <div className="contact-links">
           {links.map(({ Icon, label, href }) => (
@@ -24,6 +30,11 @@ export default function Contact() {
               {label}
             </a>
           ))}
+        </div>
+        </div>
+        <figure className="portrait-photo">
+          <img src={portratt} alt={t.contact.photoAlt} width="800" height="1000" loading="lazy" />
+        </figure>
         </div>
       </div>
     </div>

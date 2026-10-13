@@ -1,16 +1,13 @@
 import { useState, useEffect } from 'react'
+import { useLanguage } from '../i18n/useLanguage'
 
 // Sektionerna som menyn länkar till, i samma ordning som de ligger på sidan.
-const sections = [
-  { id: 'about', label: 'Om mig' },
-  { id: 'skills', label: 'Kompetens' },
-  { id: 'projects', label: 'Projekt' },
-  { id: 'lia', label: 'LIA' },
-  { id: 'contact', label: 'Kontakt' },
-]
+// Länktexterna finns i src/i18n/texts.js, så att de kan visas på båda språken.
+const sections = ['about', 'skills', 'projects', 'lia', 'contact']
 
 export default function Nav() {
   const [open, setOpen] = useState(false)
+  const { lang, toggleLang, t } = useLanguage()
   // Håller reda på vilken sektion som är synlig just nu, så vi kan visa
   // ett vinrött understreck under rätt länk i menyn.
   const [active, setActive] = useState('')
@@ -37,7 +34,7 @@ export default function Nav() {
       }
     )
 
-    sections.forEach(({ id }) => {
+    sections.forEach((id) => {
       const el = document.getElementById(id)
       if (el) observer.observe(el)
     })
@@ -52,12 +49,20 @@ export default function Nav() {
       <div className="nav-inner">
         <div className="nav-top">
           <a className="nav-logo" href="#top">Sima Soolind</a>
-          <button className="hamburger" onClick={() => setOpen(!open)} aria-label="Meny" aria-expanded={open}>
-            <span></span><span></span><span></span>
-          </button>
+          <div className="nav-actions">
+            {/* Språkknapp: valt språk visas i vinrött. aria-label talar om vad ett klick gör. */}
+            <button type="button" className="lang-toggle" onClick={toggleLang} aria-label={t.nav.switchLabel}>
+              <span lang="sv" className={lang === 'sv' ? 'lang-active' : ''}>SV</span>
+              <span aria-hidden="true" className="lang-divider">|</span>
+              <span lang="en" className={lang === 'en' ? 'lang-active' : ''}>EN</span>
+            </button>
+            <button className="hamburger" onClick={() => setOpen(!open)} aria-label={t.nav.menu} aria-expanded={open}>
+              <span></span><span></span><span></span>
+            </button>
+          </div>
         </div>
         <ul className={`nav-links${open ? ' open' : ''}`}>
-        {sections.map(({ id, label }) => (
+        {sections.map((id) => (
           <li key={id}>
             <a
               href={`#${id}`}
@@ -66,7 +71,7 @@ export default function Nav() {
               aria-current={active === id ? 'location' : undefined}
               onClick={() => setOpen(false)}
             >
-              {label}
+              {t.nav.sections[id]}
             </a>
           </li>
         ))}
