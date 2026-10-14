@@ -1,4 +1,5 @@
-import profilePhoto from "../assets/sima-leende-frilagd.webp"
+import profilePhoto from "../assets/sima-portratt-hero.webp"
+import profilePhotoWide from "../assets/sima-portratt-hero-bred.webp"
 import { FaLinkedin, FaGithub } from "react-icons/fa"
 import { useLanguage } from "../i18n/useLanguage"
 
@@ -37,7 +38,11 @@ export default function Hero() {
           {/* Fotot med en mörk yta med sned kant bakom och en vinröd linje under (CSS) */}
           <div className="photo-wrap">
             <div className="photo-frame">
-              <img src={profilePhoto} alt={t.hero.photoAlt} />
+              {/* <picture> väljer bild efter skärmbredd: hela bilden på dator, stående utsnitt på mobil */}
+              <picture>
+                <source media="(min-width: 960px)" srcSet={profilePhotoWide} />
+                <img src={profilePhoto} alt={t.hero.photoAlt} />
+              </picture>
             </div>
 
             {/* Bara på mobil: mörk ruta med sned överkant ovanpå bildens nederkant (som i Figma).

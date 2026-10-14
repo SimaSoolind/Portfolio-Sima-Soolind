@@ -1,6 +1,5 @@
 import { FaLinkedin, FaGithub } from "react-icons/fa"
 import { useLanguage } from "../i18n/useLanguage"
-import portratt from "../assets/sima-portratt-sv.webp"
 
 const links = [
   { Icon: FaLinkedin, label: "LinkedIn", href: "https://www.linkedin.com/in/sima-soolind" },
@@ -14,8 +13,7 @@ export default function Contact() {
   return (
     <div id="contact" className="section">
       <div className="section-inner">
-        {/* Rubrik, text och länkar till vänster, porträttet till höger i samma höjd som rubriken.
-            På mobil hamnar bilden under. */}
+        {/* Rubrik, text och länkar centrerade (som i Figma) */}
         <div className="contact-top">
         <div>
         <div className="section-label">{t.contact.label}</div>
@@ -32,9 +30,6 @@ export default function Contact() {
           ))}
         </div>
         </div>
-        <figure className="portrait-photo">
-          <img src={portratt} alt={t.contact.photoAlt} width="800" height="1000" loading="lazy" />
-        </figure>
         </div>
       </div>
     </div>

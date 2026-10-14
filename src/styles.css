@@ -186,19 +186,18 @@ nav {
 /* På mobil syns namnet i rutan på fotot, så hero-texten tar ingen plats */
 .hero-text { padding: 0; }
 
-/* Mobil: den mörka ytan går ut i hela skärmens bredd (negativ marginal tar bort sidpaddingen) */
+/* Mobil: den mörka ytan med fotot går ut i hela skärmens bredd (negativ marginal tar bort sidpaddingen) */
 .photo-wrap {
   margin: 0 -24px;
-  padding-top: 40px;
+  padding-top: 0;
   background-color: var(--ink);
   display: flex;
   justify-content: center;
 }
 
-/* Det frilagda fotot (utan bakgrund). Ingen ram eller skugga, så inga fotokanter syns. */
+/* Det svartvita porträttet. Bildens mörkaste färg är samma som den mörka ytan, så inga kanter syns. */
 .photo-frame {
   width: 100%;
-  max-width: 380px;
 }
 
 .photo-frame img {
@@ -1049,30 +1048,10 @@ nav {
 
 .contact-icon { width: 22px; height: 22px; }
 
-/* Kontakt: text och länkar bredvid det svartvita porträttet på större skärmar */
-.contact-top { display: grid; gap: 56px; }
-
-/* Porträttet: svartvitt med en tunn vinröd linje bakom, för ett lyxigt men lugnt uttryck. */
-.portrait-photo { margin: 0; position: relative; max-width: 360px; }
-.portrait-photo::before {
-  content: "";
-  position: absolute;
-  inset: 16px -16px -16px 16px;
-  border: 2px solid var(--accent);
-  z-index: 0;
-}
-.portrait-photo img { position: relative; z-index: 1; display: block; width: 100%; height: auto; }
-/* Mjuk skugga under porträttet, så att bilden lyfts fram från ramen */
-.portrait-photo img { box-shadow: 0 28px 56px rgba(22, 22, 22, 0.32); }
-
-@media (min-width: 960px) {
-  .contact-top { grid-template-columns: 1fr 360px; gap: 72px; align-items: start; }
-}
-
-/* Mobil: porträttet kommer först i Kontakt-delen, ovanför rubriken, så att sidan inte slutar med bilden */
-@media (max-width: 959px) {
-  .contact-top .portrait-photo { order: -1; }
-}
+/* Kontakt: rubrik, text och länkar centrerade (som i Figma) */
+.contact-top { text-align: center; }
+.contact-top .contact-text { margin-left: auto; margin-right: auto; }
+.contact-top .contact-links { justify-content: center; }
 
 /* ── FOOTER ── */
 footer {
@@ -1213,19 +1192,51 @@ footer {
     padding: 96px 0;
   }
 
-  /* Fotot står längst ner på den mörka ytan */
+  /* Det svartvita porträttet fyller hela den sneda mörka ytan. clip-path ger samma sneda kant som ytan. */
+  .hero, .hero-inner { min-height: 700px; }
+  .hero-inner { position: static; }
+  .hero-text { position: relative; z-index: 2; }
   .photo-wrap {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 50%;
     margin: 0;
-    padding-top: 56px;
-    padding-bottom: 0;
+    padding: 0;
     background-color: transparent;
-    align-items: flex-end;
+    z-index: 1;
+    clip-path: polygon(24% 0, 100% 0, 100% 100%, 0 100%);
   }
-
-  .photo-frame { width: clamp(420px, 42vw, 600px); max-width: none; }
+  .photo-frame { width: 100%; height: 100%; max-width: none; }
+  .photo-frame picture { display: block; width: 100%; height: 100%; }
+  /* Fotot står längst till höger i full höjd. Vänsterkanten tonas ut mot den mörka ytan,
+     så att ingen bildkant syns. */
+  .photo-frame { position: relative; }
+  .photo-frame img {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: auto;
+    max-width: none;
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 18%);
+    mask-image: linear-gradient(to right, transparent 0%, #000 18%);
+  }
 
   /* Rutan med namn används bara på mobil */
   .hero-card { display: none; }
+}
+
+/* Bred skärm: den mörka ytan blir bredare, så att den sneda kanten börjar ungefär vid
+   menylänken "Kompetens". På smalare skärmar behövs platsen till texten. */
+@media (min-width: 1200px) {
+  .hero::before,
+  .hero::after,
+  .photo-wrap {
+    width: 62%;
+    clip-path: polygon(18% 0, 100% 0, 100% 100%, 0 100%);
+  }
 
   .hero-fullname { font-size: 72px; }
 

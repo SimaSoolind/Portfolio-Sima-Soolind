@@ -2,8 +2,7 @@
 
 Personlig portfolio-webbplats byggd i React och Vite. Presenterar mig,
 min kompetens, mina projekt och information till företag inför LIA
-2027. Sidan finns på svenska och engelska, och designen bygger på
-Figma-mallen "Portfolio – Tomasz Gajda (Community)".
+2027. Sidan finns på svenska och engelska.
 
 ## Projektstruktur
 
@@ -31,9 +30,10 @@ Ny text läggs till på båda språken i `texts.js`, med samma nyckel.
 
 ## Funktioner
 
-- **Hero:** namnpresentation, roll och ikonlänkar till vänster, foto på
-  en mörk yta med sned vinröd kant till höger. På mobil ligger namnet i
-  en halvgenomskinlig ruta ovanpå fotot.
+- **Hero:** namnpresentation, roll och ikonlänkar till vänster och ett
+  svartvitt porträtt som fyller den sneda mörka ytan med vinröd kant till
+  höger. Datorn och mobilen får olika utsnitt av fotot via `<picture>`.
+  På mobil ligger namnet i en halvgenomskinlig ruta ovanpå fotot.
 - **Mörkt band under hero:** LIA-period som etikett, rubrik, kort text
   och två knappar (Se mina projekt, Om mig).
 - **Om mig:** ingress i större text, två stycken som syns direkt och
@@ -45,8 +45,8 @@ Ny text läggs till på båda språken i `texts.js`, med samma nyckel.
 - **Projekt:** beskrivning, skärmbilder och kodexempel som text.
   Skärmbilderna går att klicka på och förstora. Koden visas med knappen
   **Visa koden / Dölj koden**.
-- **Kontakt:** länkar till LinkedIn och GitHub och ett svartvitt
-  porträtt.
+- **Kontakt:** rubrik, text och länkar till LinkedIn och GitHub,
+  centrerade.
 
 Alla visa/dölj-knappar använder HTML-elementet `<details>` och samma
 CSS-klass, `toggle-details`. Förstoringen av bilder använder
@@ -135,12 +135,12 @@ Typsnitten laddas från Google Fonts i `index.html`.
 |---|---|
 | `App.jsx` | Sätter ihop sidan, registrerar GSAP-animationerna |
 | `Nav.jsx` | Fast meny med scroll-spy och språkknapp SV/EN |
-| `Hero.jsx` | Namnpresentation, foto och det mörka bandet med LIA-etikett |
+| `Hero.jsx` | Namnpresentation, svartvitt porträtt och det mörka bandet med LIA-etikett |
 | `About.jsx` | Ingress, text med Läs mer och tidslinjen "Min resa" |
 | `Skills.jsx` | Ikoner för tekniker, kurskort med status och kort med styrkor |
 | `Projects.jsx` | Tre projekt med beskrivning, förstoringsbara skärmbilder, kodexempel och länkar |
 | `Lia.jsx` | LIA-perioder och information till arbetsgivare |
-| `Contact.jsx` | Kontaktdel med länkar till LinkedIn och GitHub och ett svartvitt porträtt |
+| `Contact.jsx` | Kontaktdel med länkar till LinkedIn och GitHub |
 | `Footer.jsx` | Sidfot med copyright och ikonlänkar |
 
 ## Filstruktur
