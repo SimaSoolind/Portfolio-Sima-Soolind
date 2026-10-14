@@ -18,32 +18,39 @@
 }
 
 .section-label {
+  text-align: center;
   font-size: 16px;
   color: var(--muted);
   margin-bottom: 10px;
 }
 
+/* Sektionsrubrik i tjock svart ram, som i Figma-mallen ("ABOUT ME", "SKILLS"):
+   Montserrat i versaler med mycket luft mellan bokstäverna, centrerad. */
 .section-title {
-  position: relative;
-  font-size: 32px;
-  letter-spacing: -0.025em;
-  padding-bottom: 16px;
-  margin-bottom: 48px;
+  display: table;
+  margin: 0 auto 48px;
+  padding: 16px 24px;
+  border: 4px solid var(--ink);
+  font-family: 'Montserrat', 'Inter', system-ui, sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 1.3;
 }
 
-.section-title::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 36px;
-  height: 2px;
-  background-color: var(--accent);
+@media (min-width: 600px) {
+  .section-title {
+    padding: 20px 44px;
+    border-width: 5px;
+    font-size: 24px;
+    letter-spacing: 0.28em;
+  }
 }
 
 /* Läsbar radlängd oavsett hur bred spalten är. */
 .about-intro,
-.hero-desc,
 .contact-text,
 .project-desc,
 .project-bullets { max-width: 62ch; }
@@ -53,7 +60,7 @@ nav {
   position: sticky;
   top: 0;
   z-index: 100;
-  background-color: rgba(251,249,246,0.92);
+  background-color: rgba(236,235,233,0.92); /* samma ljusgrå som bakgrunden, lite genomskinlig */
   backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--rule);
 }
@@ -176,7 +183,8 @@ nav {
   flex-direction: column-reverse;
 }
 
-.hero-text { padding: 44px 0 72px; }
+/* På mobil syns namnet i rutan på fotot, så hero-texten tar ingen plats */
+.hero-text { padding: 0; }
 
 /* Mobil: den mörka ytan går ut i hela skärmens bredd (negativ marginal tar bort sidpaddingen) */
 .photo-wrap {
@@ -236,7 +244,12 @@ nav {
   clip-path: polygon(0 36px, 100% 0, 100% 100%, 0 100%);
 }
 
-.hero-card-hello { font-size: 14px; color: #D6D2CC; }
+.hero-card-hello {
+  font-family: 'Raleway', 'Inter', system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #D6D2CC;
+}
 .hero-card-name {
   font-family: 'Raleway', 'Inter', system-ui, sans-serif;
   font-size: 26px;
@@ -246,8 +259,9 @@ nav {
 }
 .hero-card-role {
   margin-top: 4px;
-  font-family: 'Fira Code', ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: 12px;
+  font-family: 'Raleway', 'Inter', system-ui, sans-serif;
+  font-size: 13px;
+  font-weight: 600;
   color: #BDB8B0;
 }
 
@@ -265,10 +279,11 @@ nav {
 .hero-card-links a:focus-visible { outline: 2px solid #FFFFFF; outline-offset: 2px; }
 .hero-card-links svg { width: 22px; height: 22px; }
 
-/* På mobil står namn och roll i rutan ovanför. Rubriken (h1) finns kvar för skärmläsare
-   men döljs visuellt, och etiketten döljs helt. */
+/* På mobil står namn, roll och ikoner i rutan ovanför. Rubriken (h1) finns kvar för
+   skärmläsare men döljs visuellt. Roll och ikoner döljs, de finns redan i rutan. */
 @media (max-width: 959px) {
-  .hero-text .hero-badge { display: none; }
+  .hero-text .hero-role,
+  .hero-text .hero-links { display: none; }
   .hero-name {
     position: absolute;
     width: 1px;
@@ -279,38 +294,125 @@ nav {
   }
 }
 
-.hero-badge {
-  display: inline-block;
-  font-family: 'Fira Code', ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: 14px;
+/* Hero på dator: liten hälsning, stort namn, roll och ikoner (som i Figma) */
+.hero-name { color: var(--ink); }
+
+/* Raleway i hela namnpresentationen, som i Figma-mallen */
+.hero-hello {
+  display: block;
+  font-family: 'Raleway', 'Inter', system-ui, sans-serif;
+  font-size: 24px;
   font-weight: 500;
-  letter-spacing: 0.04em;
-  color: var(--ink);
-  border: 1px solid var(--accent);
-  border-radius: 6px;
-  padding: 6px 13px;
-  margin-bottom: 24px;
+  letter-spacing: 0;
+  color: var(--muted);
+  margin-bottom: 8px;
 }
 
-.hero-name {
+.hero-fullname {
+  display: block;
   font-size: 46px;
+  font-weight: 700;
   letter-spacing: -0.035em;
+  line-height: 1.05;
+}
+
+/* Rollen med en kort vinröd linje framför, för en lyxig detalj */
+.hero-role {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 16px;
+  font-family: 'Raleway', 'Inter', system-ui, sans-serif;
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.hero-role::before {
+  content: "";
+  width: 32px;
+  height: 2px;
+  background-color: var(--accent);
+}
+
+/* Ikonlänkar: fyrkantiga knappar med ljus bakgrund och mjuk skugga (som i Figma).
+   Ikonen blir vinröd när man håller musen över knappen. */
+.hero-links { display: flex; gap: 14px; margin-top: 36px; }
+.hero-links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 6px;
+  background-color: #F7F6F4;
+  box-shadow: 0 2px 6px rgba(22, 22, 22, 0.15);
   color: var(--ink);
+  transition: color 0.15s ease, transform 0.15s ease;
+}
+.hero-links a:hover { color: var(--accent); transform: translateY(-2px); }
+.hero-links svg { width: 22px; height: 22px; }
+
+/* ── MÖRKT BAND UNDER HERO ── beskrivning, LIA-period och knappar.
+   Vinröd linje överst, samma vinröda som den sneda kanten. */
+.hero-band {
+  background-color: var(--ink);
+  border-top: 4px solid var(--accent);
+  padding: 48px 24px 56px;
+}
+
+.hero-band-inner {
+  max-width: var(--measure);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+/* LIA-etikett: vinröd kant, vinröd punkt och vit text, så att perioden syns direkt */
+.lia-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 16px;
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  background-color: rgba(122, 28, 42, 0.25);
+  font-family: 'Montserrat', 'Inter', system-ui, sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: #FFFFFF;
   margin-bottom: 22px;
 }
-
-.hero-name span { color: var(--accent); }
-
-.hero-desc {
-  font-size: 18px;
-  line-height: 1.75;
-  margin-bottom: 20px;
+/* Mobil: lite mindre text så att perioden får plats på en rad */
+@media (max-width: 499px) {
+  .lia-pill { font-size: 12px; letter-spacing: 0.02em; padding: 8px 14px; }
+}
+.lia-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #E0566B; /* ljusare vinröd, syns mot den mörka bakgrunden */
 }
 
-.hero-meta {
-  font-size: 15px;
-  color: var(--muted);
-  margin-bottom: 32px;
+/* Rubriken i bandet: Montserrat i versaler med luft mellan bokstäverna (som "IT BERRIES" i Figma) */
+.hero-band-title {
+  font-family: 'Montserrat', 'Inter', system-ui, sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  margin-bottom: 10px;
+}
+
+/* Ljus text på mörk bakgrund: kontrast ca 14:1 */
+.hero-band-text {
+  font-size: 17px;
+  line-height: 1.7;
+  color: #E3DFD9;
+  max-width: 52ch;
 }
 
 .btn-gold {
@@ -350,22 +452,42 @@ nav {
 
 .btn-outline:hover { background-color: var(--ink); color: #FFFFFF; }
 
+/* Ljus variant av andraknappen, för det mörka bandet */
+.btn-outline--light { color: #FFFFFF; border-color: #FFFFFF; }
+.btn-outline--light:hover { background-color: #FFFFFF; color: var(--ink); }
+
 /* ── ABOUT ── */
 .about-intro {
   font-size: 18px;
   line-height: 1.8;
-  margin-bottom: 56px;
 }
 
-.about-intro strong { font-weight: 600; }
+/* "Läs mer" i Om mig: luft under, innan tidslinjen börjar */
+.about-more { margin-bottom: 56px; }
 
-.about-grid {
+/* Varje stycke i Om mig får luft under sig */
+.about-intro p + p { margin-top: 18px; }
+
+/* Ingressen: större Raleway-text med en kort vinröd linje till vänster */
+.about-lead {
+  font-family: 'Raleway', 'Inter', system-ui, sans-serif;
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--ink);
+  padding-left: 20px;
+  border-left: 3px solid var(--accent);
+  margin-bottom: 32px;
+  max-width: 34ch;
+}
+
+.strength-grid {
   display: grid;
   grid-template-columns: 1fr;
   gap: 40px;
 }
 
-.about-icon {
+.strength-icon {
   width: 22px;
   height: 22px;
   color: var(--accent);
@@ -374,18 +496,20 @@ nav {
   display: block;
 }
 
-.about-card h3 {
+.strength-card h4 {
+  font-family: 'Raleway', 'Inter', system-ui, sans-serif;
+  font-weight: 700;
   font-size: 18px;
   margin-bottom: 10px;
 }
 
-.about-card p {
+.strength-card p {
   font-size: 16px;
   color: var(--muted);
   line-height: 1.7;
 }
 
-.about-card em {
+.strength-card em {
   font-style: normal;
   color: var(--ink);
 }
@@ -464,8 +588,8 @@ nav {
 }
 
 /* ── SKILLS ──
-   Ikoner i rutnät (inspirerat av Figma-mallen). Ikonerna är grå och blir vinröda
-   när man håller musen över rutan. Kurser utan logotyp visas som rader med en ikon. */
+   Ikoner i rutnät (inspirerat av Figma-mallen). Ikonerna är vinröda, i samma färg
+   som resten av sidan, och lyfts lite när man håller musen över dem. Kurser utan logotyp visas som rader med en ikon. */
 .skill-heading {
   font-size: 15px;
   font-weight: 700;
@@ -485,47 +609,119 @@ nav {
   gap: 12px;
 }
 
+/* Vinröda logotyper direkt på bakgrunden, utan rutor */
 .skill-tile {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 10px;
-  padding: 18px 8px 14px;
-  background-color: var(--surface);
-  border: 1px solid var(--rule);
-  border-radius: 10px;
-  font-size: 14px;
+  padding: 14px 4px;
   text-align: center;
-  transition: border-color 0.15s ease;
 }
-
 .skill-tile-icon {
-  font-size: 30px;
+  font-size: 40px;
+  color: var(--accent);
+  transition: transform 0.15s ease;
+}
+.skill-tile:hover .skill-tile-icon { transform: translateY(-3px); }
+
+/* Namnet under logotypen: Montserrat i versaler med luft mellan bokstäverna */
+.skill-tile span {
+  font-family: 'Montserrat', 'Inter', system-ui, sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   color: var(--muted);
-  transition: color 0.15s ease;
 }
 
-.skill-tile:hover { border-color: var(--accent); }
-.skill-tile:hover .skill-tile-icon { color: var(--accent); }
+@media (prefers-reduced-motion: reduce) {
+  .skill-tile-icon { transition: none; }
+  .skill-tile:hover .skill-tile-icon { transform: none; }
+}
 
-.course-list {
+/* Kurser som kort: ljus yta, ikon i vinröd cirkel, kursnamn, förklaring och status */
+.course-cards {
   list-style: none;
+  display: grid;
+  gap: 12px;
   margin-top: 18px;
 }
 
-.course-list li {
+.course-card {
   display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 16px 18px;
+  background-color: #F7F6F4;
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  transition: border-color 0.15s ease;
+}
+.course-card:hover { border-color: var(--accent); }
+
+.course-icon-wrap {
+  flex-shrink: 0;
+  display: inline-flex;
   align-items: center;
-  gap: 12px;
-  padding: 10px 0;
-  border-bottom: 1px solid var(--rule);
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: rgba(122, 28, 42, 0.1);
+}
+.course-icon { font-size: 17px; color: var(--accent); }
+
+.course-title {
+  font-family: 'Raleway', 'Inter', system-ui, sans-serif;
   font-size: 16px;
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--ink);
 }
 
-.course-icon {
-  flex-shrink: 0;
-  font-size: 18px;
-  color: var(--accent);
+.course-note {
+  margin-top: 4px;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+/* Statusrad: etikett med färgad punkt, och VG som egen vinröd etikett */
+.course-meta { display: flex; align-items: center; gap: 8px; margin-top: 8px; }
+
+.course-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Montserrat', 'Inter', system-ui, sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.course-status-dot { width: 7px; height: 7px; border-radius: 50%; background-color: var(--muted); }
+.course-status--done .course-status-dot { background-color: var(--ink); }
+.course-status--ongoing { color: var(--accent); }
+.course-status--ongoing .course-status-dot { background-color: var(--accent); }
+.course-status--planned .course-status-dot,
+.course-status--date .course-status-dot { background-color: transparent; border: 1.5px solid var(--muted); }
+
+.course-grade {
+  font-family: 'Montserrat', 'Inter', system-ui, sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #FFFFFF;
+  background-color: var(--accent);
+  border-radius: 4px;
+  padding: 2px 7px;
+}
+
+/* Kurslistor i full bredd (Lär mig nu, Utveckling): två kort i bredd på större skärm */
+@media (min-width: 700px) {
+  .section-inner > .course-cards { grid-template-columns: 1fr 1fr; }
 }
 
 /* Säkerhet och Arbetssätt: under varandra på mobil, bredvid varandra på stor skärm */
@@ -590,6 +786,92 @@ nav {
   border-radius: 8px;
 }
 
+/* Bilden som knapp: ingen knappstil, bara bilden. Förstoringsikon syns vid hovring och fokus. */
+.project-shot-button {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: zoom-in;
+}
+.project-shot-button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 8px; }
+.project-shot-zoom {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: rgba(22, 22, 22, 0.75);
+  color: #FFFFFF;
+  font-size: 16px;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+.project-shot-button:hover .project-shot-zoom,
+.project-shot-button:focus-visible .project-shot-zoom { opacity: 1; }
+/* På pekskärmar finns ingen hovring, så ikonen syns alltid */
+@media (hover: none) { .project-shot-zoom { opacity: 1; } }
+
+/* ── FÖRSTORAD BILD (lightbox) ── mörk bakgrund, bilden så stor som skärmen tillåter */
+.lightbox {
+  max-width: 100vw;
+  max-height: 100vh;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 24px;
+  border: none;
+  background: transparent;
+}
+.lightbox::backdrop { background-color: rgba(10, 10, 10, 0.88); }
+.lightbox[open] { display: flex; align-items: center; justify-content: center; }
+.lightbox-figure {
+  position: relative;
+  margin: 0;
+  max-width: min(1400px, 100%);
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.lightbox-figure img {
+  max-width: 100%;
+  max-height: calc(100vh - 120px);
+  object-fit: contain;
+  border-radius: 8px;
+  background-color: #FFFFFF;
+}
+.lightbox-figure figcaption {
+  margin-top: 12px;
+  font-size: 15px;
+  color: #E3DFD9;
+  text-align: center;
+}
+/* Stängknappen: 44 × 44 px, uppe till höger ovanför bilden */
+.lightbox-close {
+  align-self: flex-end;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  margin-bottom: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  background: transparent;
+  color: #FFFFFF;
+  font-size: 22px;
+  cursor: pointer;
+}
+.lightbox-close:hover { background-color: #FFFFFF; color: var(--ink); }
+.lightbox-close:focus-visible { outline: 3px solid #FFFFFF; outline-offset: 3px; }
+
 .project-shot figcaption {
   margin-top: 8px;
   font-size: 14px;
@@ -636,8 +918,8 @@ nav {
   color: var(--muted);
 }
 
-/* Knappen "Visa koden": tydlig knapp med vinröd kant, klickytan minst 44 px hög */
-.project-code-details summary {
+/* Visa/dölj-knappar ("Visa koden", "Läs mer"): tydlig knapp med vinröd kant, klickytan minst 44 px hög */
+.toggle-details summary {
   display: inline-flex;
   align-items: center;
   gap: 10px;
@@ -654,30 +936,33 @@ nav {
   list-style: none;
   transition: background-color 0.15s ease, color 0.15s ease;
 }
-.project-code-details summary::-webkit-details-marker { display: none; }
+.toggle-details summary::-webkit-details-marker { display: none; }
 
 /* Pilen vrids nedåt när koden är öppen */
-.project-code-details summary::before {
+.toggle-details summary::before {
   content: "▸";
   content: "▸" / ""; /* tom alt-text: skärmläsare läser inte upp pilen */
   font-size: 18px;
   line-height: 1;
   transition: transform 0.15s ease;
 }
-.project-code-details[open] summary::before { transform: rotate(90deg); }
-/* Visar "Visa koden" när koden är stängd och "Dölj koden" när den är öppen */
-.project-code-details .code-hide { display: none; }
-.project-code-details[open] .code-show { display: none; }
-.project-code-details[open] .code-hide { display: inline; }
-.project-code-details summary:hover { background-color: var(--accent); color: #FFFFFF; }
-.project-code-details summary:focus-visible {
+.toggle-details[open] summary::before { transform: rotate(90deg); }
+/* Visar ena texten när innehållet är stängt och den andra när det är öppet ("Visa koden"/"Dölj koden", "Läs mer"/"Visa mindre") */
+.toggle-details .toggle-hide { display: none; }
+.toggle-details[open] .toggle-show { display: none; }
+.toggle-details[open] .toggle-hide { display: inline; }
+.toggle-details summary:hover { background-color: var(--accent); color: #FFFFFF; }
+.toggle-details summary:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 3px;
 }
-.project-code-details pre { margin-top: 12px; }
+.toggle-details pre { margin-top: 12px; }
+
+/* Dold text i Om mig: samma avstånd mellan styckena som ovanför */
+.about-more .about-intro { margin-top: 18px; }
 
 @media (prefers-reduced-motion: reduce) {
-  .project-code-details summary::before { transition: none; }
+  .toggle-details summary::before { transition: none; }
 }
 
 .project-code figcaption strong { color: var(--ink); font-weight: 600; }
@@ -718,11 +1003,14 @@ nav {
   gap: 36px;
 }
 
+/* Samma stil som rubrikerna under Kompetens: Montserrat i versaler med luft mellan bokstäverna */
 .lia-col h3 {
+  font-family: 'Montserrat', 'Inter', system-ui, sans-serif;
   font-size: 15px;
-  font-weight: 500;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   color: var(--muted);
-  letter-spacing: 0;
   margin-bottom: 12px;
 }
 
@@ -779,6 +1067,11 @@ nav {
 
 @media (min-width: 960px) {
   .contact-top { grid-template-columns: 1fr 360px; gap: 72px; align-items: start; }
+}
+
+/* Mobil: porträttet kommer först i Kontakt-delen, ovanför rubriken, så att sidan inte slutar med bilden */
+@media (max-width: 959px) {
+  .contact-top .portrait-photo { order: -1; }
 }
 
 /* ── FOOTER ── */
@@ -845,12 +1138,11 @@ footer {
 
   .nav-links li a { padding: 0; }
 
-  .hero-name { font-size: 56px; }
+  .hero-fullname { font-size: 56px; }
 
   .section { padding: 112px 24px; }
-  .section-title { font-size: 40px; }
 
-  .about-grid { grid-template-columns: 1fr 1fr; gap: 44px 48px; }
+  .strength-grid { grid-template-columns: 1fr 1fr; gap: 44px 48px; }
   .skill-columns { grid-template-columns: 1fr 1fr; }
   .lia-grid { grid-template-columns: 1fr 1fr; }
   .project-shots { grid-template-columns: 1fr 1fr; }
@@ -935,7 +1227,18 @@ footer {
   /* Rutan med namn används bara på mobil */
   .hero-card { display: none; }
 
-  .hero-name { font-size: 68px; }
+  .hero-fullname { font-size: 72px; }
+
+  /* Bandet: beskrivningen till vänster, LIA-period och knappar till höger */
+  .hero-band { padding: 56px 24px; }
+  .hero-band-inner {
+    max-width: 1200px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 64px;
+  }
+  .hero-band-inner .hero-actions { flex-shrink: 0; }
 }
 
 /* ── TIDSLINJE PÅ STOR SKÄRM ── fyra steg bredvid varandra */
@@ -958,3 +1261,39 @@ footer {
   }
 }
 
+
+/* ── MONTSERRAT (som i Figma-mallen) ──
+   Knappar, meny och små etiketter använder Montserrat. Brödtexten behåller Inter,
+   eftersom den är lättare att läsa i långa stycken. */
+.btn-gold,
+.btn-outline,
+.toggle-details summary,
+.nav-links li a,
+.lang-toggle,
+.section-label,
+.skill-heading,
+.journey-heading,
+.project-link,
+.contact-link {
+  font-family: 'Montserrat', 'Inter', system-ui, sans-serif;
+}
+
+/* Knappar i versaler med luft mellan bokstäverna */
+.btn-gold,
+.btn-outline,
+.toggle-details summary {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* Etiketten ovanför varje rubrik ("OM MIG", "KOMPETENS") */
+.section-label {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.nav-links li a { font-weight: 600; }

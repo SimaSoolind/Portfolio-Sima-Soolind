@@ -2,7 +2,7 @@ import {
   SiHtml5, SiCss, SiJavascript, SiTypescript, SiReact, SiVite, SiTailwindcss, SiZod,
   SiVitest, SiPostgresql, SiMongodb, SiGit, SiFigma, SiNodedotjs, SiExpress, SiGooglegemini,
 } from "react-icons/si"
-import { FiShield, FiBookOpen, FiUsers } from "react-icons/fi"
+import { FiShield, FiBookOpen, FiUsers, FiCpu, FiLayers } from "react-icons/fi"
 import { useLanguage } from "../i18n/useLanguage"
 
 // Kompetens i fyra grupper, inspirerat av Figma-mallen ("Using now" / "Learning").
@@ -24,7 +24,7 @@ const usingNow = [
   { Icon: SiMongodb, name: "MongoDB" },
   { Icon: SiGit, name: "Git & GitHub" },
   { Icon: SiFigma, name: "Figma" },
-  { Icon: SiGooglegemini, name: "Gemini" }, // översätter tolkningarna i Bibel-appens datapipeline
+  { Icon: SiGooglegemini, name: "Gemini API" }, // anropas från Bibel-appens datapipeline och översätter tolkningarna
 ]
 
 // Tekniker jag läser nu (hösten 2026 och januari 2027)
@@ -46,14 +46,49 @@ function SkillTile({ Icon, name }) {
   )
 }
 
-// En lista med kurser, med samma ikon framför varje rad
-function CourseList({ Icon, items }) {
+// Kopplar namnet i texts.js till rätt ikon för korten under "Styrkor"
+const strengthIcons = { shield: FiShield, cpu: FiCpu, layers: FiLayers, users: FiUsers }
+
+// Visar en korttext där { em: '...' } blir framhävd (används för kursnamn)
+function CardText({ parts }) {
+  return parts.map((part, i) =>
+    typeof part === "string" ? part : <em key={i}>{part.em}</em>
+  )
+}
+
+// Statusetikett för en kurs: Klar, Pågår, Planerad eller ett datum. VG visas som en egen etikett.
+function CourseStatus({ course, labels }) {
+  if (!course.status) return null
+  const text = course.status === "date" ? course.date : labels[course.status]
   return (
-    <ul className="course-list">
-      {items.map((item) => (
-        <li key={item}>
-          <Icon className="course-icon" aria-hidden="true" />
-          {item}
+    <p className="course-meta">
+      <span className={`course-status course-status--${course.status}`}>
+        <span className="course-status-dot" aria-hidden="true" />
+        {text}
+      </span>
+      {course.grade && (
+        <span className="course-grade" aria-label={`${labels.gradeLabel} ${course.grade}`}>
+          {course.grade}
+        </span>
+      )}
+    </p>
+  )
+}
+
+// Kurserna som kort: ikon i vinröd cirkel, kursnamn, kort förklaring och status
+function CourseCards({ Icon, items, labels }) {
+  return (
+    <ul className="course-cards">
+      {items.map((course) => (
+        <li key={course.title} className="course-card">
+          <span className="course-icon-wrap" aria-hidden="true">
+            <Icon className="course-icon" />
+          </span>
+          <div>
+            <h4 className="course-title">{course.title}</h4>
+            {course.note && <p className="course-note">{course.note}</p>}
+            <CourseStatus course={course} labels={labels} />
+          </div>
         </li>
       ))}
     </ul>
@@ -80,17 +115,36 @@ export default function Skills() {
         <ul className="skill-tiles">
           {learningNow.map((skill) => <SkillTile key={skill.name} {...skill} />)}
         </ul>
-        <CourseList Icon={FiBookOpen} items={s.learningCourses} />
+        <CourseCards Icon={FiBookOpen} items={s.learningCourses} labels={s.status} />
+
+        {/* Avklarade utvecklingskurser */}
+        <h3 className="skill-heading">{s.devHeading}</h3>
+        <CourseCards Icon={FiBookOpen} items={s.devCourses} labels={s.status} />
 
         <div className="skill-columns">
           <div>
             <h3 className="skill-heading">{s.security}</h3>
-            <CourseList Icon={FiShield} items={s.securityCourses} />
+            <CourseCards Icon={FiShield} items={s.securityCourses} labels={s.status} />
           </div>
           <div>
             <h3 className="skill-heading">{s.work}</h3>
-            <CourseList Icon={FiUsers} items={s.workCourses} />
+            <CourseCards Icon={FiUsers} items={s.workCourses} labels={s.status} />
           </div>
+        </div>
+
+        {/* Styrkor: fyra kort om vad jag tar med mig (flyttade hit från Om mig) */}
+        <h3 className="skill-heading">{s.strengthsHeading}</h3>
+        <div className="strength-grid">
+          {s.cards.map((card) => {
+            const Icon = strengthIcons[card.icon]
+            return (
+              <div className="strength-card" key={card.icon}>
+                <Icon className="strength-icon" aria-hidden="true" />
+                <h4>{card.title}</h4>
+                <p><CardText parts={card.text} /></p>
+              </div>
+            )
+          })}
         </div>
       </div>
     </div>

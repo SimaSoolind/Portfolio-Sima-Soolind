@@ -1,15 +1,4 @@
-import { FiShield, FiCpu, FiLayers, FiUsers } from "react-icons/fi"
 import { useLanguage } from "../i18n/useLanguage"
-
-// Kopplar namnet i texts.js till rätt ikon
-const icons = { shield: FiShield, cpu: FiCpu, layers: FiLayers, users: FiUsers }
-
-// Visar en korttext där { em: '...' } blir kursiv (används för kursnamn)
-function CardText({ parts }) {
-  return parts.map((part, i) =>
-    typeof part === "string" ? part : <em key={i}>{part.em}</em>
-  )
-}
 
 export default function About() {
   // t.about innehåller texterna för "Om mig" på valt språk
@@ -19,18 +8,31 @@ export default function About() {
   return (
     <div id="about" className="section">
       <div className="section-inner">
-        <div className="section-label">{a.label}</div>
         <h2 className="section-title">{a.title}</h2>
 
-        <p className="about-intro">
-          {a.intro.map((paragraph) => (
-            <span key={paragraph}>
-              {paragraph}
-              <br /><br />
-            </span>
+        {/* Ingressen: en kort mening i större text som väcker nyfikenhet */}
+        <p className="about-lead">{a.lead}</p>
+
+        {/* De två första styckena syns direkt */}
+        <div className="about-intro">
+          {a.paragraphs.slice(0, 2).map((paragraph) => (
+            <p key={paragraph}>{paragraph}</p>
           ))}
-          <strong>{a.strengthBold}</strong> {a.strengthRest}
-        </p>
+        </div>
+
+        {/* Resten visas när besökaren klickar på "Läs mer". <details> fungerar utan JavaScript,
+            med tangentbord och med skärmläsare. */}
+        <details className="toggle-details about-more">
+          <summary>
+            <span className="toggle-show">{a.readMore}</span>
+            <span className="toggle-hide">{a.showLess}</span>
+          </summary>
+          <div className="about-intro">
+            {a.paragraphs.slice(2).map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
+          </div>
+        </details>
 
         {/* Tidslinjen är en ordnad lista (ol), så att skärmläsare läser upp stegen i ordning */}
         <h3 className="journey-heading">{a.journeyHeading}</h3>
@@ -45,20 +47,6 @@ export default function About() {
             </li>
           ))}
         </ol>
-
-        <div className="about-grid">
-          {a.cards.map((card) => {
-            const Icon = icons[card.icon]
-            return (
-              <div className="about-card" key={card.icon}>
-                <Icon className="about-icon" />
-
-                <h3>{card.title}</h3>
-                <p><CardText parts={card.text} /></p>
-              </div>
-            )
-          })}
-        </div>
       </div>
     </div>
   )

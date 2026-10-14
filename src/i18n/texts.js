@@ -16,22 +16,27 @@ export const texts = {
     hero: {
       badge: 'Fullstackutvecklare · IT-säkerhet',
       greeting: 'Hej, mitt namn är',
-      desc: 'Jag bygger moderna, säkra webbapplikationer. Innan jag började utveckla arbetade jag 16 år med människor som undersköterska, frisör och lärare. Det är den kombinationen jag tar med mig in i tekniken.',
       meta: 'Söker LIA-plats 2027 · v. 11–24 & v. 33–43',
       projectsButton: 'Se mina projekt →',
-      contactButton: 'Kontakta mig',
+      aboutButton: 'Om mig →',
+      bandTitle: 'Säker kod. Mänsklig förståelse.',
+      bandText: 'Jag bygger webbapplikationer där säkerhet och användaren kommer först.',
       photoAlt: 'Sima Soolind',
     },
     about: {
-      label: 'Om mig',
-      title: 'Från människor till kod',
-      intro: [
-        'Jag heter Sima Soolind. Jag studerar till fullstackutvecklare på Företagsuniversitetet.',
-        'Jag bytte till utveckling för att jag tycker om att skapa lösningar på problem. IT är ett brett område. Här kan jag alltid utvecklas, vara med i den tekniska utvecklingen och påverka hur säkra systemen blir.',
-        'Jag är van att bryta ner svåra saker i mindre steg. Det gjorde jag som lärare. Nu gör jag det när jag lär mig kod och säkerhet.',
+      title: "Om mig",
+      readMore: "Läs mer",
+      showLess: "Visa mindre",
+      // Ingressen visas i större text överst och ska väcka nyfikenhet
+      lead: "Jag ger mig inte förrän det fungerar.",
+      paragraphs: [
+        "Jag bygger moderna, säkra webbapplikationer. Innan jag började utveckla arbetade jag i 16 år med människor, som undersköterska, frisör och lärare.",
+        "Jag är envis och målmedveten. När något blir svårt ser jag det som nästa steg i min utveckling, inte som ett stopp. Kan jag inte något letar jag tills jag förstår det. Sedan testar jag det direkt i mina projekt, för det är så jag lär mig bäst.",
+        "Mina projekt kommer från verkliga behov omkring mig. ParishHub bygger jag för S:t Georgs kyrka, och Bibel-appen för församlingar. Att veta att det jag bygger kommer att användas på riktigt är det som driver mig.",
+        "Jag bygger för alla, inte bara för de flesta. Därför går texten att lyssna på, storleken går att ändra, och apparna fungerar på flera språk, med fler på väg. Inkludering är inget jag lägger till på slutet. Det finns med från första början.",
+        "Jag har både den sociala och den tekniska sidan. Jag kan prata med kunder och myndigheter, förklara svåra saker enkelt och skriva säker kod.",
+        "Vill du se hur jag tänker? Titta på mina projekt, eller hör av dig.",
       ],
-      strengthBold: 'Jag har både den sociala sidan och den tekniska sidan.',
-      strengthRest: 'Jag kan prata med kunder och myndigheter, förklara svårt på ett enkelt sätt, och skriva säker kod. Det är min styrka.',
       journeyHeading: 'Min resa',
       // Sista steget (current) är där jag är nu och markeras i vinrött.
       journey: [
@@ -40,6 +45,9 @@ export const texts = {
         { title: 'Lärare på vårdutbildningen', place: 'Arena Utbildning', time: '6 år', text: 'Jag anpassade undervisningen efter varje deltagare och höll samtidigt kursens kunskapskrav, så att alla kunde klara sina kurser. Planering, kartläggning och samordning med alla inblandade.' },
         { title: 'Fullstackutvecklare med säkerhetsinriktning', place: 'Företagsuniversitetet', time: '2025–', text: 'Samma sätt att tänka, nu i kod: förstå behovet, bryt ner problemet och bygg säkert från start.', current: true },
       ],
+    },
+    skills: {
+      strengthsHeading: 'Styrkor',
       // Korten: text är en lista där { em: '...' } visas kursivt (kursnamn).
       cards: [
         { icon: 'shield', title: 'Säkerhet & Compliance (GRC)', text: ['Jag har läst ', { em: 'Dataskydd inom IT och AI' }, ' och ', { em: 'Ledning och samordning av cybersäkerhet' }, '. Från mina år med myndighetskontakt är jag van vid dokumentation och regelverk. Jag bygger med säkerhet som grund, inte som ett sista steg.'] },
@@ -47,29 +55,91 @@ export const texts = {
         { icon: 'layers', title: 'Struktur & Ansvar', text: ['Som lärare planerade jag kurser och samordnade med flera parter samtidigt. Jag är van att ta eget ansvar och att förklara svåra saker enkelt.'] },
         { icon: 'users', title: 'Service & Användarfokus', text: ['Från vård och frisöryrket har jag lång erfarenhet av att lyssna på vad någon faktiskt behöver. Jag tar med mig det när jag bygger gränssnitt som ska vara enkla att använda.'] },
       ],
-    },
-    skills: {
       "label": "Kompetens",
       "title": "Vad jag arbetar med",
       "usingNow": "Använder nu",
       "learningNow": "Lär mig nu",
       "security": "Säkerhet och dataskydd",
       "work": "Arbetssätt",
+      "status": {
+        "done": "Klar",
+        "ongoing": "Pågår",
+        "planned": "Planerad",
+        "gradeLabel": "Betyg"
+      },
       "learningCourses": [
-        "Säker applikationslivscykel",
-        "Tillämpad AI för systemutveckling och test",
-        "AI-integration via egen backend (AI-förklaringar efter läsprofil, kopplas på när backend är igång)",
-        "REST API:er och JWT (i backendkursen)",
-        "Java (januari 2027)"
+        {
+          "title": "Säker applikationslivscykel",
+          "status": "ongoing"
+        },
+        {
+          "title": "Tillämpad AI för systemutveckling och test",
+          "status": "ongoing"
+        },
+        {
+          "title": "REST API:er och JWT",
+          "note": "I backendkursen",
+          "status": "ongoing"
+        },
+        {
+          "title": "AI-integration via egen backend",
+          "note": "AI-förklaringar efter läsprofil, kopplas på när backend är igång",
+          "status": "planned"
+        },
+        {
+          "title": "TypeScript, fördjupning",
+          "note": "Grunderna klara via Scrimba, fördjupning i en parallell kurs",
+          "status": "date",
+          "date": "Våren 2027"
+        },
+        {
+          "title": "Java",
+          "status": "date",
+          "date": "Januari 2027"
+        }
+      ],
+      "devHeading": "Utveckling",
+      "devCourses": [
+        {
+          "title": "Databaser",
+          "status": "done",
+          "grade": "VG"
+        }
       ],
       "securityCourses": [
-        "Cybersäkerhet",
-        "GRC – ledning och samordning av cybersäkerhet",
-        "Dataskydd inom IT och AI"
+        {
+          "title": "GRC – ledning och samordning av cybersäkerhet",
+          "status": "done",
+          "grade": "VG"
+        },
+        {
+          "title": "Cybersäkerhet",
+          "status": "done"
+        },
+        {
+          "title": "Dataskydd inom IT och AI",
+          "status": "done"
+        },
+        {
+          "title": "IT-säkerhet",
+          "status": "planned"
+        }
       ],
       "workCourses": [
-        "Agila metoder",
-        "Affärsmannaskap"
+        {
+          "title": "AI-assisterad utveckling med Claude Code",
+          "note": "Egna agenter granskar säkerhet, tester och tillgänglighet, och jag läser och godkänner varje ändring. Kopplat till kursen Tillämpad AI för systemutveckling och test."
+        },
+        {
+          "title": "Agila metoder",
+          "status": "done",
+          "grade": "VG"
+        },
+        {
+          "title": "Affärsmannaskap",
+          "status": "done",
+          "grade": "VG"
+        }
       ]
     },
     projects: {
@@ -84,6 +154,8 @@ export const texts = {
       "solution": "Lösning:",
       "result": "Resultat:",
       "showCode": "Visa koden",
+      "zoomImage": "Förstora bilden",
+      "closeImage": "Stäng bilden",
       "hideCode": "Dölj koden",
       "items": {
         "parishhub": {
@@ -210,9 +282,9 @@ export const texts = {
       "title": "Information för företag",
       "periodsHeading": "Perioder",
       "periods": [
-        "LIA 1 — v. 11–24, 2027 (50 YH-p)",
-        "LIA 2 — v. 33–43, 2027 (40 YH-p)",
-        "Examensarbete — v. 44–51, 2027 (30 YH-p)"
+        "LIA 1 — v. 11–24, 2027 (50 YH‑p)",
+        "LIA 2 — v. 33–43, 2027 (40 YH‑p)",
+        "Examensarbete — v. 44–51, 2027 (30 YH‑p)"
       ],
       "employerHeading": "För er som arbetsgivare",
       "employer": [
@@ -243,22 +315,27 @@ export const texts = {
     hero: {
       badge: 'Full-stack developer · IT security',
       greeting: "Hi, I'm",
-      desc: 'I build modern, secure web applications. Before I started developing, I spent 16 years working with people — as an assistant nurse, a hairdresser and a teacher. That combination is what I bring into tech.',
       meta: 'Looking for an internship (LIA) in 2027 · weeks 11–24 & 33–43',
       projectsButton: 'See my projects →',
-      contactButton: 'Contact me',
+      aboutButton: 'About me →',
+      bandTitle: 'Secure code. Human understanding.',
+      bandText: 'I build web applications where security and the user come first.',
       photoAlt: 'Sima Soolind',
     },
     about: {
-      label: 'About me',
-      title: 'From people to code',
-      intro: [
-        "My name is Sima Soolind. I'm studying to become a full-stack developer at Företagsuniversitetet.",
-        'I moved into development because I enjoy creating solutions to problems. IT is a broad field. Here I can keep growing, be part of the technical development and influence how secure systems become.',
-        "I'm used to breaking difficult things down into smaller steps. I did that as a teacher. Now I do it when I learn code and security.",
+      title: "About me",
+      readMore: "Read more",
+      showLess: "Show less",
+      // Ingressen visas i större text överst och ska väcka nyfikenhet
+      lead: "I don't give up until it works.",
+      paragraphs: [
+        "I build modern, secure web applications. Before I started developing, I spent 16 years working with people, as an assistant nurse, a hairdresser and a teacher.",
+        "I'm stubborn and goal-oriented. When something gets hard, I see it as the next step in my development, not a dead end. If I don't know something, I search until I understand it. Then I test it straight away in my projects, because that's how I learn best.",
+        "My projects come from real needs around me. I'm building ParishHub for St. George's Church, and the Bible app for parishes. Knowing that what I build will actually be used is what drives me.",
+        "I build for everyone, not just for most people. That's why the text can be read aloud, the size can be changed, and the apps work in several languages, with more on the way. Inclusion isn't something I add at the end. It's there from the very beginning.",
+        "I have both the social side and the technical side. I can talk to customers and public authorities, explain difficult things simply and write secure code.",
+        "Want to see how I think? Take a look at my projects, or get in touch.",
       ],
-      strengthBold: 'I have both the social side and the technical side.',
-      strengthRest: 'I can talk to customers and public authorities, explain complex things in a simple way, and write secure code. That is my strength.',
       journeyHeading: 'My journey',
       journey: [
         { title: 'Assistant nurse', time: '4 years', text: 'Care and nursing every day. This is where I learned to see and meet every person\'s needs.' },
@@ -266,35 +343,100 @@ export const texts = {
         { title: 'Teacher in health and social care', place: 'Arena Utbildning', time: '6 years', text: 'I adapted my teaching to each participant while meeting the course requirements, so that everyone could pass their courses. Planning, needs assessment and coordination with everyone involved.' },
         { title: 'Full-stack developer specialising in security', place: 'Företagsuniversitetet', time: '2025–', text: 'The same way of thinking, now in code: understand the need, break down the problem and build securely from the start.', current: true },
       ],
+    },
+    skills: {
+      strengthsHeading: 'Strengths',
       cards: [
         { icon: 'shield', title: 'Security & Compliance (GRC)', text: ['I have studied ', { em: 'Data Protection in IT and AI' }, ' and ', { em: 'Cybersecurity Management and Coordination' }, '. From my years of working with public authorities, I am used to documentation and regulations. I build with security as the foundation, not as a final step.'] },
         { icon: 'cpu', title: 'AI Development & Project Management', text: ['I combine development with ', { em: 'Applied AI for Systems Development and Testing' }, ' and ', { em: 'Leading AI Projects – from Strategy to Delivery' }, '. I am used to driving work from idea to finished solution.'] },
         { icon: 'layers', title: 'Structure & Responsibility', text: ['As a teacher, I planned courses and coordinated with several parties at the same time. I am used to taking responsibility and explaining difficult things simply.'] },
         { icon: 'users', title: 'Service & User Focus', text: ['From healthcare and hairdressing, I have long experience of listening to what someone actually needs. I bring that with me when I build interfaces that should be easy to use.'] },
       ],
-    },
-    skills: {
       "label": "Skills",
       "title": "What I work with",
       "usingNow": "Using now",
       "learningNow": "Learning now",
       "security": "Security and data protection",
       "work": "Ways of working",
+      "status": {
+        "done": "Completed",
+        "ongoing": "In progress",
+        "planned": "Planned",
+        "gradeLabel": "Grade"
+      },
       "learningCourses": [
-        "Secure Application Lifecycle",
-        "Applied AI for Systems Development and Testing",
-        "AI integration via my own backend (AI explanations based on reading profile, connected once the backend is running)",
-        "REST APIs and JWT (in the backend course)",
-        "Java (January 2027)"
+        {
+          "title": "Secure Application Lifecycle",
+          "status": "ongoing"
+        },
+        {
+          "title": "Applied AI for Systems Development and Testing",
+          "status": "ongoing"
+        },
+        {
+          "title": "REST APIs and JWT",
+          "note": "In the backend course",
+          "status": "ongoing"
+        },
+        {
+          "title": "AI integration via my own backend",
+          "note": "AI explanations based on reading profile, connected once the backend is running",
+          "status": "planned"
+        },
+        {
+          "title": "TypeScript, advanced",
+          "note": "Basics completed via Scrimba, advanced studies in a parallel course",
+          "status": "date",
+          "date": "Spring 2027"
+        },
+        {
+          "title": "Java",
+          "status": "date",
+          "date": "January 2027"
+        }
+      ],
+      "devHeading": "Development",
+      "devCourses": [
+        {
+          "title": "Databases",
+          "status": "done",
+          "grade": "VG"
+        }
       ],
       "securityCourses": [
-        "Cybersecurity",
-        "GRC – Cybersecurity Management and Coordination",
-        "Data Protection in IT and AI"
+        {
+          "title": "GRC – Cybersecurity Management and Coordination",
+          "status": "done",
+          "grade": "VG"
+        },
+        {
+          "title": "Cybersecurity",
+          "status": "done"
+        },
+        {
+          "title": "Data Protection in IT and AI",
+          "status": "done"
+        },
+        {
+          "title": "IT Security",
+          "status": "planned"
+        }
       ],
       "workCourses": [
-        "Agile Methods",
-        "Business Acumen"
+        {
+          "title": "AI-assisted development with Claude Code",
+          "note": "Custom agents review security, tests and accessibility, and I read and approve every change. Linked to the course Applied AI for Systems Development and Testing."
+        },
+        {
+          "title": "Agile Methods",
+          "status": "done",
+          "grade": "VG"
+        },
+        {
+          "title": "Business Acumen",
+          "status": "done",
+          "grade": "VG"
+        }
       ]
     },
     projects: {
@@ -309,6 +451,8 @@ export const texts = {
       "solution": "Solution:",
       "result": "Result:",
       "showCode": "Show the code",
+      "zoomImage": "Enlarge the image",
+      "closeImage": "Close the image",
       "hideCode": "Hide the code",
       "items": {
         "parishhub": {

@@ -5,15 +5,15 @@
 }
 
 :root {
-  /* Palett: varm vit, nästan svart och vinrött (samma vinröda som ParishHub).
+  /* Palett: ljusgrå (som i Figma-mallen), nästan svart och vinrött (samma vinröda som ParishHub).
      Vinrött används sparsamt, till knappar, ikoner och streck. Kontrast mot
-     bakgrunden: text 17,2:1, dämpad text 6,4:1, vinrött 9,9:1 (WCAG kräver 4,5:1). */
-  --bg: #FBF9F6;        /* varm vit — bakgrund */
+     bakgrunden: text 15,2:1, dämpad text 5,6:1, vinrött 8,7:1 (WCAG kräver 4,5:1). */
+  --bg: #ECEBE9;        /* ljusgrå — bakgrund */
   --surface: #F3F0EB;   /* lite mörkare, för bildytor och rutor */
   --ink: #161616;       /* nästan svart — brödtext */
   --muted: #5C5C5C;     /* dämpad text */
   --sand: #E9E4DC;      /* ramar och toningar */
-  --rule: #D9D3CA;      /* hårfina linjer */
+  --rule: #CFCAC2;      /* hårfina linjer (lite mörkare, så de syns mot den grå bakgrunden) */
   --heading: #161616;   /* rubriker och länkar */
   --heading-dark: #000000;
   --accent: #7A1C2A;    /* vinrött — knappar, ikoner och streck */
@@ -30,8 +30,8 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-h1, h2, h3 {
-  /* Raleway för rubriker (från Figma-mallen), Inter för brödtext */
+h1, h2, h3, h4 {
+  /* Raleway för alla rubriker (h1–h4, från Figma-mallen), Inter för brödtext */
   font-family: 'Raleway', 'Inter', system-ui, sans-serif;
   font-weight: 700;
   line-height: 1.25;

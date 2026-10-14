@@ -1,3 +1,5 @@
+import { useEffect, useRef, useState } from "react"
+import { FiX, FiMaximize2 } from "react-icons/fi"
 import { useLanguage } from "../i18n/useLanguage"
 
 // Data som är likadan på båda språken: bilder, teknik, kod och länkar.
@@ -138,6 +140,20 @@ export default function Projects() {
   // Länktext efter typ av länk
   const linkText = { private: tp.privateRepo, github: "GitHub", live: tp.viewLive }
 
+  // Förstorad bild: { src, alt, caption } när en bild är öppen, annars null
+  const [zoomed, setZoomed] = useState(null)
+  const dialogRef = useRef(null)
+
+  // Öppnar <dialog> som modal när en bild väljs. Webbläsaren låser då fokus i rutan,
+  // stänger den med Esc och lämnar tillbaka fokus till bilden man klickade på.
+  useEffect(() => {
+    if (zoomed && dialogRef.current && !dialogRef.current.open) {
+      dialogRef.current.showModal()
+    }
+  }, [zoomed])
+
+  const closeZoom = () => dialogRef.current?.close()
+
   return (
     <div id="projects" className="section">
       <div className="section-inner">
@@ -169,7 +185,16 @@ export default function Projects() {
                 <div className="project-shots">
                   {p.images.map((src, i) => (
                     <figure className="project-shot" key={src}>
-                      <img src={src} alt={text.images[i]?.alt ?? ""} loading="lazy" />
+                      {/* Bilden är en knapp: klick (eller Enter) öppnar en förstorad version */}
+                      <button
+                        type="button"
+                        className="project-shot-button"
+                        onClick={() => setZoomed({ src, alt: text.images[i]?.alt ?? "", caption: text.images[i]?.caption })}
+                        aria-label={`${tp.zoomImage}: ${text.images[i]?.alt ?? ""}`}
+                      >
+                        <img src={src} alt="" loading="lazy" />
+                        <span className="project-shot-zoom" aria-hidden="true"><FiMaximize2 /></span>
+                      </button>
                       {text.images[i]?.caption && <figcaption>{text.images[i].caption}</figcaption>}
                     </figure>
                   ))}
@@ -194,11 +219,11 @@ export default function Projects() {
                     </figcaption>
                     {/* Koden döljs tills besökaren klickar, så att sidan blir kortare.
                         <details> fungerar utan JavaScript, med tangentbord och med skärmläsare. */}
-                    <details className="project-code-details">
+                    <details className="toggle-details">
                       {/* Texten byts till "Dölj koden" när koden är öppen (styrs med CSS) */}
                       <summary>
-                        <span className="code-show">{tp.showCode}</span>
-                        <span className="code-hide">{tp.hideCode}</span>
+                        <span className="toggle-show">{tp.showCode}</span>
+                        <span className="toggle-hide">{tp.hideCode}</span>
                       </summary>
                       <pre tabIndex={0} aria-label={`${tp.codeLabel} ${text.title}: ${codeText.title}`}>
                         <code>{code.snippet}</code>
@@ -234,6 +259,25 @@ export default function Projects() {
           })}
         </div>
       </div>
+
+      {/* Förstorad bild. Klick utanför bilden eller på krysset stänger rutan. */}
+      <dialog
+        ref={dialogRef}
+        className="lightbox"
+        aria-label={zoomed?.alt}
+        onClose={() => setZoomed(null)}
+        onClick={(e) => { if (e.target === e.currentTarget) closeZoom() }}
+      >
+        {zoomed && (
+          <figure className="lightbox-figure">
+            <button type="button" className="lightbox-close" onClick={closeZoom} aria-label={tp.closeImage}>
+              <FiX aria-hidden="true" />
+            </button>
+            <img src={zoomed.src} alt={zoomed.alt} />
+            {zoomed.caption && <figcaption>{zoomed.caption}</figcaption>}
+          </figure>
+        )}
+      </dialog>
     </div>
   )
 }
